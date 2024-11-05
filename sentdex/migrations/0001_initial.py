@@ -7,22 +7,26 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Destination',
+            name="Destination",
             fields=[
-                ('id', models.IntegerField(primary_key=True, serialize=False, verbose_name='شناسه')),
-                ('country', models.CharField(max_length=256, verbose_name='کشور')),
-                ('img1', models.ImageField(upload_to='pics', verbose_name='تصویر یک')),
-                ('img2', models.ImageField(upload_to='pics', verbose_name='تصویر دو')),
-                ('number', models.IntegerField(default=2, verbose_name='شماره')),
+                (
+                    "id",
+                    models.IntegerField(
+                        primary_key=True, serialize=False, verbose_name="شناسه"
+                    ),
+                ),
+                ("country", models.CharField(max_length=256, verbose_name="کشور")),
+                ("img1", models.ImageField(upload_to="pics", verbose_name="تصویر یک")),
+                ("img2", models.ImageField(upload_to="pics", verbose_name="تصویر دو")),
+                ("number", models.IntegerField(default=2, verbose_name="شماره")),
             ],
             options={
-                'verbose_name': 'مقصد',
-                'verbose_name_plural': 'مقصد',
+                "verbose_name": "مقصد",
+                "verbose_name_plural": "مقصد",
             },
         ),
     ]
