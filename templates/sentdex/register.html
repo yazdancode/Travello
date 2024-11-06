@@ -30,9 +30,8 @@
 
     <form action="register" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <!-- <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins"> -->
-<!--             <div class="wrapper wrapper--w680">
+        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div class="wrapper wrapper--w680">
                 <div class="card card-4">
                     <div class="card-body">
                         <h2 class="title">فرم ثبت نام</h2>
@@ -106,7 +105,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Jquery JS-->
         <script src="{% static 'sentdex/colorlib-regform-4/vendor/jquery/jquery.min.js' %}"></script>
         <!-- Vendor JS-->
