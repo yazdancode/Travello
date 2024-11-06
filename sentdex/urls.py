@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
-
-from . import views
+from sentdex.views import DestinationView
 
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path('', DestinationView.as_view(), name='index'),
 ]
