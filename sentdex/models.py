@@ -102,5 +102,3 @@ class PassengerDetail(models.Model):
     class Meta:
         verbose_name = "جزئیات مسافر"
         verbose_name_plural = "جزئیات مسافران"
-        
-        
