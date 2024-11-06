@@ -119,7 +119,7 @@ class Card(models.Model):
     balance = models.DecimalField(
         max_digits=12, decimal_places=2, verbose_name="موجودی"
     )
-    email = models.EmailField(max_length=50, default="yshabanei@gmail.com")
+    email = models.EmailField(max_length=50, default="yshabanei@gmail.com", verbose_name="ایمیل")
 
     def __str__(self):
         return f"{self.card_number} - {self.email}"

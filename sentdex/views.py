@@ -1,15 +1,17 @@
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.views import View
+from sentdex.forms import RegisterForm
 from sentdex.models import Destination, DetailedDescription
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.urls import reverse_lazy
+
 
 class DestinationView(View):
     template_name = 'sentdex/index.html'
     
-    def get_destinations_with_descriptions(self):
+    @staticmethod
+    def get_destinations_with_descriptions():
         dest1 = []
         for i in range(6):
             try:
@@ -29,33 +31,37 @@ class RegisterView(View):
     template_name = 'sentdex/register.html'
 
     def get(self, request):
+        # form = RegisterForm()
         return render(request, self.template_name)
 
     def post(self, request):
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        form = RegisterForm  # Correct usage of request.POST (uppercase)
+        if form.is_valid():
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
 
-        if password1 == password2:
+            # Check if the username or email already exists
             if User.objects.filter(username=username).exists():
-                messages.info(request, 'Username is already taken')
+                messages.info(request, 'نام کاربری قبلاً استفاده شده است')
                 return redirect('register')
             elif User.objects.filter(email=email).exists():
-                messages.info(request, 'Email is already taken')
+                messages.info(request, 'ایمیل قبلاً استفاده شده است')
                 return redirect('register')
             else:
                 user = User.objects.create_user(
                     username=username,
-                    password=password1,
+                    password=password,
                     email=email,
                     first_name=first_name,
                     last_name=last_name
                 )
                 user.save()
+                messages.success(request, 'ثبت نام با موفقیت انجام شد. لطفاً وارد شوید.')
                 return redirect('login')
         else:
-            messages.info(request, 'Passwords do not match')
-            return redirect('register')
+            messages.error(request, 'اطلاعات وارد شده معتبر نیست')
+            return render(request, self.template_name, {'form': form})
+
