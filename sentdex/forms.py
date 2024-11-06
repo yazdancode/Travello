@@ -1,29 +1,48 @@
 from django import forms
-from django.forms import ModelForm
 import re
 
 
-class RegisterForm(ModelForm):
-    first_name = forms.CharField(max_length=255, label="نام")
-    last_name = forms.CharField(max_length=255, label="نام خانوادگی")
+class RegisterForm(forms.Form):
+    first_name = forms.CharField(
+        max_length=255,
+        label="نام",
+        widget=forms.TextInput(
+            attrs={
+                "class": "input--style-4",
+            }
+        ),
+    )
+    last_name = forms.CharField(
+        max_length=255,
+        label="نام خانوادگی",
+        widget=forms.TextInput(
+            attrs={
+                "class": "input--style-4",
+            }
+        ),
+    )
     password = forms.CharField(
-        min_length=8, max_length=16, label="رمز عبور", widget=forms.PasswordInput
+        min_length=8,
+        max_length=16,
+        label="رمز عبور",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "input--style-4",
+            }
+        ),
     )
     password_to_accept = forms.CharField(
-        min_length=8, max_length=16, label="تأیید رمز عبور", widget=forms.PasswordInput
+        min_length=8,
+        max_length=16,
+        label="تأیید رمز عبور",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "input--style-4",
+            }
+        ),
     )
     phone_number = forms.CharField(max_length=14, label="شماره تلفن")
     email = forms.EmailField(max_length=50, label="ایمیل")
-
-    class Meta:
-        fields = [
-            "first_name",
-            "last_name",
-            "password",
-            "password_to_accept",
-            "phone_number",
-            "email",
-        ]
 
     def clean(self):
         cleaned_data = super().clean()

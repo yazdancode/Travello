@@ -32,25 +32,24 @@ class RegisterView(View):
     template_name = "sentdex/register.html"
 
     def get(self, request):
-        # form = RegisterForm()
-        return render(request, self.template_name)
+        form = RegisterForm()
+        return render(request, self.template_name, {"form": form})
 
     def post(self, request):
-        form = RegisterForm
+        form = RegisterForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data.get("first_name")
             last_name = form.cleaned_data.get("last_name")
-            username = form.cleaned_data.get("username")
+            username = form.cleaned_data.get("email")  # Use email as username
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
 
-            # Check if the username or email already exists
             if User.objects.filter(username=username).exists():
                 messages.info(request, "نام کاربری قبلاً استفاده شده است")
-                return redirect("register")
+                return render(request, self.template_name, {"form": form})
             elif User.objects.filter(email=email).exists():
                 messages.info(request, "ایمیل قبلاً استفاده شده است")
-                return redirect("register")
+                return render(request, self.template_name, {"form": form})
             else:
                 user = User.objects.create_user(
                     username=username,
@@ -65,30 +64,3 @@ class RegisterView(View):
         else:
             messages.error(request, "اطلاعات وارد شده معتبر نیست")
             return render(request, self.template_name, {"form": form})
-
-
-def login(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = auth.authenticate(username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            messages.info(request, "با موفقیت وارد سیستم شدید")
-            email = request.user.email
-            print(email)
-            content = (
-                "Hello "
-                + request.user.first_name
-                + " "
-                + request.user.last_name
-                + "\n"
-                + "You are logged in in our site.keep connected and keep travelling."
-            )
-            dests = Destination.objects.all()
-            return render(request, "index.html", {"dests": dests})
-        else:
-            messages.info(request, "اعتبار نامعتبر است")
-            return redirect("login")
-    else:
-        return render(request, "login.html")
