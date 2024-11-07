@@ -47,21 +47,16 @@ class RegisterForm(forms.Form):
     )
     phone_number = forms.CharField(
         max_length=14,
-         label="شماره تلفن",
-         widget=forms.TextInput(    
-            attrs={
-            "class": "input--style-4",
-            "type": "text",
-            "maxlength":"12"
-            }))
+        label="شماره تلفن",
+        widget=forms.TextInput(
+            attrs={"class": "input--style-4", "type": "text", "maxlength": "12"}
+        ),
+    )
     email = forms.EmailField(
         max_length=50,
         label="ایمیل",
-        widget=forms.TextInput(
-            attrs={
-            "class":"input--style-4",
-            "type":"email"
-            }))
+        widget=forms.TextInput(attrs={"class": "input--style-4", "type": "email"}),
+    )
 
     def clean(self):
         cleaned_data = super().clean()

@@ -1,9 +1,8 @@
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.views import View
-
 from sentdex.forms import RegisterForm
 from sentdex.models import Destination, DetailedDescription
 
@@ -64,3 +63,30 @@ class RegisterView(View):
         else:
             messages.error(request, "اطلاعات وارد شده معتبر نیست")
             return render(request, self.template_name, {"form": form})
+
+
+class LoginView(View):
+    template_name = 'sentdex/login.html'
+    success_template_name = 'index.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            messages.info(request, 'با موفقیت وارد سیستم شد')
+            content = (
+                f"سلام {request.user.first_name} {request.user.last_name}\n"
+                "شما وارد سایت ما شده اید. در ارتباط باشید و به سفر ادامه دهید."
+            )
+            dests = Destination.objects.all()
+            return render(request, self.success_template_name, {'dests': dests})
+
+        else:
+            messages.info(request, 'اعتبارنامه نامعتبر')
+            return redirect('login')

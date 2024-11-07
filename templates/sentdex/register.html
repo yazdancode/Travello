@@ -26,16 +26,14 @@
     <link href="{% static 'sentdex/colorlib-regform-4/css/main.css' %}" rel="stylesheet" media="all">
 
     <style>
-        /* انیمیشن چرخشی دکمه ارسال */
+        {% comment %} /* انیمیشن چرخشی دکمه ارسال */
         .btn--loading {
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
-        }
-
+        } {% endcomment %}
         /* انیمیشن فید-این فیلدهای فرم */
         .input-group {
             opacity: 0;
@@ -93,6 +91,64 @@
             50% { transform: translateX(5px); }
             75% { transform: translateX(-5px); }
         }
+        {% comment %} /* انیمیشن تمرکز روی فیلد */
+        .input-group:focus-within {
+            animation: focusPulse 0.5s ease-in-out forwards;
+        }
+        @keyframes focusPulse {
+            0% {
+                box-shadow: 0 0 0px rgba(0, 150, 136, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 8px rgba(0, 150, 136, 0.7);
+            } {% endcomment %}
+
+        {% comment %} /* انیمیشن نوسان فیلد خطا */
+        .input-group.error input {
+            animation: errorBounce 0.3s ease-in-out;
+        }
+        @keyframes errorBounce {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        } {% endcomment %}
+        {% comment %} /* انیمیشن محو شدن پیام‌های موفقیت */
+        .message.success {
+            animation: fadeOut 5s ease forwards;
+            animation-delay: 3s;
+        }
+        
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        } {% endcomment %}
+        /* انیمیشن حرکت فرم */
+        .card-body {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 0.7s ease forwards;
+        }
+    
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        /* انیمیشن تغییر رنگ دکمه در هنگام کلیک */
+        .btn:active {
+            transform: scale(0.95);
+            background-color: #004d40;
+        }  
+
+
+            
     </style>
 </head>
 
