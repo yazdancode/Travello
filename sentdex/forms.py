@@ -10,6 +10,7 @@ class RegisterForm(forms.Form):
             attrs={
                 "class": "input100",
                 "type": "text",
+                "min_length": "10",
                 "placeholder": "نام کاربری خود را تایپ کنید",
             }
         ),
@@ -42,6 +43,7 @@ class RegisterForm(forms.Form):
             attrs={
                 "class": "input--style-4",
                 "type": "password",
+                "placeholder": "رمز عبور خود را تایپ کنید"
             }
         ),
     )
