@@ -18,6 +18,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css' %}">
 </head>
 <body>
-	 <form action="login" method="POST">
+	 <form action="{% url 'login' %}" method="POST">
 	 	{% csrf_token %}
-	 	
+	 	<div class="limiter">
+	 		<div class="container-login100" style="background-image: url('{% static 'images/bg-01.jpg'%}');">
+	 			<div class="wrap-login100 p-1-55 p-r-55 p-t-65 p-b-54">
+	 				<form class="wrap-login100-form validate-form">
+	 					<span class="wrap-login100-form-title p-b-49">
+	 						<font color="orange-purple">سفرلو</font>
+	 					</span>
+	 					<div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+	 						<span class="label-input100">نام کاربری</span>
+                           {{ form }} 

@@ -52,7 +52,7 @@
         /* انیمیشن هایور دکمه‌ها */
         .btn:hover {
             background-color: #00695c;
-            box-shadow: 0px 4px 15px rgba(0, 105, 92, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
             transform: scale(1.05);
             transition: all 0.3s ease;
         }
@@ -75,15 +75,12 @@
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
+            0% { background-position: 0 50%; }
             50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 0 50%; }
         }
 
-        /* انیمیشن پیام‌های خطا */
-        .input-group.error {
-            animation: shake 0.3s;
-        }
+
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -91,43 +88,6 @@
             50% { transform: translateX(5px); }
             75% { transform: translateX(-5px); }
         }
-        {% comment %} /* انیمیشن تمرکز روی فیلد */
-        .input-group:focus-within {
-            animation: focusPulse 0.5s ease-in-out forwards;
-        }
-        @keyframes focusPulse {
-            0% {
-                box-shadow: 0 0 0px rgba(0, 150, 136, 0.4);
-            }
-            100% {
-                box-shadow: 0 0 8px rgba(0, 150, 136, 0.7);
-            } {% endcomment %}
-
-        {% comment %} /* انیمیشن نوسان فیلد خطا */
-        .input-group.error input {
-            animation: errorBounce 0.3s ease-in-out;
-        }
-        @keyframes errorBounce {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-10px); }
-            40% { transform: translateX(10px); }
-            60% { transform: translateX(-5px); }
-            80% { transform: translateX(5px); }
-        } {% endcomment %}
-        {% comment %} /* انیمیشن محو شدن پیام‌های موفقیت */
-        .message.success {
-            animation: fadeOut 5s ease forwards;
-            animation-delay: 3s;
-        }
-        
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        } {% endcomment %}
         /* انیمیشن حرکت فرم */
         .card-body {
             opacity: 0;
@@ -229,5 +189,4 @@
     <script src="{% static 'sentdex/colorlib-regform-4/js/global.js' %}"></script>
 </form>
 </body>
-<!-- This template was made by Colorlib (https://colorlib.com) -->
 </html>
