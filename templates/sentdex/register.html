@@ -26,15 +26,6 @@
     <link href="{% static 'sentdex/colorlib-regform-4/css/main.css' %}" rel="stylesheet" media="all">
 
     <style>
-        {% comment %} /* انیمیشن چرخشی دکمه ارسال */
-        .btn--loading {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        } {% endcomment %}
-        /* انیمیشن فید-این فیلدهای فرم */
         .input-group {
             opacity: 0;
             transform: translateY(20px);
@@ -105,10 +96,7 @@
         .btn:active {
             transform: scale(0.95);
             background-color: #004d40;
-        }  
-
-
-            
+        }
     </style>
 </head>
 
@@ -184,8 +172,6 @@
     <script src="{% static 'sentdex/colorlib-regform-4/vendor/select2/select2.min.js' %}"></script>
     <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/moment.min.js' %}"></script>
     <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/daterangepicker.js' %}"></script>
-
-    <!-- Main JS -->
     <script src="{% static 'sentdex/colorlib-regform-4/js/global.js' %}"></script>
 </form>
 </body>

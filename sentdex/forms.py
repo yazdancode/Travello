@@ -3,6 +3,17 @@ import re
 
 
 class RegisterForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        label="نام کاربری",
+        widget=forms.TextInput(
+            attrs={
+                "class": "input100",
+                "type": "text",
+                "placeholder": "نام کاربری خود را تایپ کنید",
+            }
+        ),
+    )
     first_name = forms.CharField(
         max_length=255,
         label="نام",

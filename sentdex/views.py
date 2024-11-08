@@ -66,27 +66,33 @@ class RegisterView(View):
 
 
 class LoginView(View):
-    template_name = 'sentdex/login.html'
-    success_template_name = 'index.html'
+    template_name = "sentdex/login.html"
+    success_template_name = "index.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        form = RegisterForm()
+        return render(request, self.template_name, {"form": form})
 
     def post(self, request):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
 
-        user = auth.authenticate(request, username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            messages.info(request, 'با موفقیت وارد سیستم شد')
-            content = (
-                f"سلام {request.user.first_name} {request.user.last_name}\n"
-                "شما وارد سایت ما شده اید. در ارتباط باشید و به سفر ادامه دهید."
-            )
-            dests = Destination.objects.all()
-            return render(request, self.success_template_name, {'dests': dests})
-
+            user = auth.authenticate(request, username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                messages.info(request, "با موفقیت وارد سیستم شد")
+                content = (
+                    f"سلام {request.user.first_name} {request.user.last_name}\n"
+                    "شما وارد سایت ما شده اید. در ارتباط باشید و به سفر ادامه دهید."
+                )
+                dests = Destination.objects.all()
+                return render(request, self.success_template_name, {"dests": dests, "content": content})
+            else:
+                messages.info(request, "اعتبارنامه نامعتبر")
+                return redirect("login")
         else:
-            messages.info(request, 'اعتبارنامه نامعتبر')
-            return redirect('login')
+            # Display the form again with validation errors
+            messages.error(request, "لطفاً فرم را با اطلاعات معتبر پر کنید.")
+            return render(request, self.template_name, {"form": form})
