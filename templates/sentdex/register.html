@@ -1,178 +1,236 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="fa" dir="auto">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Colorlib Templates" />
+    <meta name="author" content="Colorlib" />
+    <meta name="keywords" content="Colorlib Templates" />
 
     <!-- Title Page-->
     <title>ثبت نام سفر</title>
 
     <!-- Icons font CSS-->
-    <link href="{% static 'sentdex/colorlib-regform-4/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'sentdex/colorlib-regform-4/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link
+      href="{% static 'sentdex/colorlib-regform-4/vendor/mdi-font/css/material-design-iconic-font.min.css' %}"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="{% static 'sentdex/colorlib-regform-4/vendor/font-awesome-4.7/css/font-awesome.min.css' %}"
+      rel="stylesheet"
+      media="all"
+    />
     <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
 
     <!-- Vendor CSS-->
-    <link href="{% static 'sentdex/colorlib-regform-4/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+    <link
+      href="{% static 'sentdex/colorlib-regform-4/vendor/select2/select2.min.css' %}"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/daterangepicker.css' %}"
+      rel="stylesheet"
+      media="all"
+    />
 
     <!-- Main CSS-->
-    <link href="{% static 'sentdex/colorlib-regform-4/css/main.css' %}" rel="stylesheet" media="all">
+    <link
+      href="{% static 'sentdex/colorlib-regform-4/css/main.css' %}"
+      rel="stylesheet"
+      media="all"
+    />
 
     <style>
-        .input-group {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.5s ease-in-out forwards;
-            animation-delay: 0.3s;
-        }
+      .input-group {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s ease-in-out forwards;
+        animation-delay: 0.3s;
+      }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        /* انیمیشن هایور دکمه‌ها */
-        .btn:hover {
-            background-color: #00695c;
-            box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
-            transform: scale(1.05);
-            transition: all 0.3s ease;
-        }
+      /* انیمیشن هایور دکمه‌ها */
+      .btn:hover {
+        background-color: #00695c;
+        box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+      }
 
-        /* انیمیشن پیام موفقیت */
-        .message.success {
-            animation: scaleUp 0.5s ease forwards;
-        }
+      /* انیمیشن پیام موفقیت */
+      .message.success {
+        animation: scaleUp 0.5s ease forwards;
+      }
 
-        @keyframes scaleUp {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+      @keyframes scaleUp {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
         }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
 
-        /* انیمیشن گرادینت پس‌زمینه */
-        .bg-gra-02 {
-            background: linear-gradient(135deg, #71b7e6, #9b59b6);
-            background-size: 200% 200%;
-            animation: gradientBG 5s ease infinite;
-        }
+      /* انیمیشن گرادینت پس‌زمینه */
+      .bg-gra-02 {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        background-size: 200% 200%;
+        animation: gradientBG 5s ease infinite;
+      }
 
-        @keyframes gradientBG {
-            0% { background-position: 0 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0 50%; }
+      @keyframes gradientBG {
+        0% {
+          background-position: 0 50%;
         }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0 50%;
+        }
+      }
 
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+      }
+      /* انیمیشن حرکت فرم */
+      .card-body {
+        opacity: 0;
+        transform: translateX(-50px);
+        animation: slideIn 0.7s ease forwards;
+      }
 
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
+      @keyframes slideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
         }
-        /* انیمیشن حرکت فرم */
-        .card-body {
-            opacity: 0;
-            transform: translateX(-50px);
-            animation: slideIn 0.7s ease forwards;
-        }
-    
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        /* انیمیشن تغییر رنگ دکمه در هنگام کلیک */
-        .btn:active {
-            transform: scale(0.95);
-            background-color: #004d40;
-        }
+      }
+      /* انیمیشن تغییر رنگ دکمه در هنگام کلیک */
+      .btn:active {
+        transform: scale(0.95);
+        background-color: #004d40;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <form action="{% url 'register' %}" method="POST">
-        {% csrf_token %}
-        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-            <div class="wrapper wrapper--w680">
-                <div class="card card-4">
-                    <div class="card-body">
-                        <h2 class="title">فرم ثبت نام</h2>
-                        
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    {{ form.first_name }}
-                                    <span class="tooltip">نام خود را وارد کنید</span>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    {{ form.last_name }}
-                                    <span class="tooltip">نام خانوادگی خود را وارد کنید</span>
-                                </div>
-                            </div>
-                        </div>
+      {% csrf_token %}
+      <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+          <div class="card card-4">
+            <div class="card-body">
+              <h2 class="title">فرم ثبت نام</h2>
 
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    {{ form.password }}
-                                    <span class="tooltip">لطفاً رمز عبور خود را وارد کنید</span>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    {{ form.password_to_accept }}
-                                    <span class="tooltip">رمز عبور را تایید کنید</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    {{ form.email }}
-                                    <span class="tooltip">لطفا ایمیل خود را وارد کنید</span>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    {{ form.phone_number }}
-                                    <span class="tooltip">لطفا شماره موبایل خود را وارد کنید</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" onclick="this.classList.add('btn--loading')">ارسال کنید</button><br><br><br>
-                            <button class="btn btn--radius-2 btn--green" type="button" onclick="window.location.href='login'">وارد شوید</button>
-                        </div>
-                        <div>
-                            {% for message in messages %}
-                            <h4 class="message success">{{ message }}</h4>
-                            {% endfor %}
-                        </div>
-                    </div>
+              <div class="row row-space">
+                <div class="col-2">
+                  <div class="input-group">
+                    {{ form.first_name }}
+                    <span class="tooltip">نام خود را وارد کنید</span>
+                  </div>
                 </div>
-            </div>
-        </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    {{ form.last_name }}
+                    <span class="tooltip">نام خانوادگی خود را وارد کنید</span>
+                  </div>
+                </div>
+              </div>
 
-    <!-- Vendor JS -->
-    <script src="{% static 'sentdex/colorlib-regform-4/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'sentdex/colorlib-regform-4/vendor/select2/select2.min.js' %}"></script>
-    <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/moment.min.js' %}"></script>
-    <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/daterangepicker.js' %}"></script>
-    <script src="{% static 'sentdex/colorlib-regform-4/js/global.js' %}"></script>
-</form>
-</body>
+              <div class="row row-space">
+                <div class="col-2">
+                  <div class="input-group">
+                    {{ form.password }}
+                    <span class="tooltip">لطفاً رمز عبور خود را وارد کنید</span>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    {{ form.password_to_accept }}
+                    <span class="tooltip">رمز عبور را تایید کنید</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row row-space">
+                <div class="col-2">
+                  <div class="input-group">
+                    {{ form.email }}
+                    <span class="tooltip">لطفا ایمیل خود را وارد کنید</span>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-group">
+                    {{ form.phone_number }}
+                    <span class="tooltip"
+                      >لطفا شماره موبایل خود را وارد کنید</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="p-t-15">
+                <button
+                  class="btn btn--radius-2 btn--blue"
+                  type="submit"
+                  onclick="this.classList.add('btn--loading')"
+                >
+                  ارسال کنید</button
+                ><br /><br /><br />
+                <button
+                  class="btn btn--radius-2 btn--green"
+                  type="button"
+                  onclick="window.location.href='{% url 'login' %}'"
+                >
+                  وارد شوید
+                </button>
+              </div>
+              <div>
+                {% for message in messages %}
+                <h4 class="message success">{{ message }}</h4>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vendor JS -->
+      <script src="{% static 'sentdex/colorlib-regform-4/vendor/jquery/jquery.min.js' %}"></script>
+      <script src="{% static 'sentdex/colorlib-regform-4/vendor/select2/select2.min.js' %}"></script>
+      <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/moment.min.js' %}"></script>
+      <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/daterangepicker.js' %}"></script>
+      <script src="{% static 'sentdex/colorlib-regform-4/js/global.js' %}"></script>
+    </form>
+  </body>
 </html>
