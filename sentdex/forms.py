@@ -43,7 +43,7 @@ class RegisterForm(forms.Form):
             attrs={
                 "class": "input--style-4",
                 "type": "password",
-                "placeholder": "رمز عبور خود را تایپ کنید"
+                "placeholder": "رمز عبور خود را تایپ کنید",
             }
         ),
     )

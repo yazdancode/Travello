@@ -89,16 +89,20 @@ class LoginView(View):
                     "شما وارد سایت ما شده اید. در ارتباط باشید و به سفر ادامه دهید."
                 )
                 dests = Destination.objects.all()
-                return render(request, self.success_template_name, {"dests": dests, "content": content})
+                return render(
+                    request,
+                    self.success_template_name,
+                    {"dests": dests, "content": content},
+                )
             else:
                 messages.info(request, "اعتبارنامه نامعتبر")
                 return redirect("login")
         else:
             messages.error(request, "لطفاً فرم را با اطلاعات معتبر پر کنید.")
             return render(request, self.template_name, {"form": form})
-        
-        
+
+
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('index')
+        return redirect("index")
