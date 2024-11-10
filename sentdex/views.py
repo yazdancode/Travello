@@ -2,8 +2,9 @@ from django.contrib import messages, auth
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from sentdex.forms import RegisterForm
 from sentdex.models import Destination, DetailedDescription
 
@@ -106,3 +107,14 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect("index")
+
+
+class DestinationListView(LoginRequiredMixin, View):
+    login_url = "login"
+
+    def get(self, request, city_name):
+        dest = get_object_or_404(DetailedDescription, dest_id=city_name)
+        request.session["price"] = dest.price
+        request.session["city"] = city_name
+        return render(request, "sentdex/destination_details.html", {"dest": dest})
+
