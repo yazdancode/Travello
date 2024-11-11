@@ -157,4 +157,69 @@
 								<img src="{{dest.img1.url}}" alt="">
 								<a href="destination_details/{{dest.dest_name}}" methods="GET" class="prise">{{dest.price}}</a>
 							</div>
-							
+							<div class="place_info">
+								<a href='destination_details/{{dest.dest_name}}' ><h3>{{dest.dest_name}}</h3></a>
+								<p>{{dest.country}}</p>
+								<div class="rating_days d_flex justify-content-between">
+									<span class="d-flex justify-content-center align-items-center">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</span>
+									<div  class="days">
+										<i class="fa fa-clock-o"></i>
+										<a href='destination_details/{{dest.dest_name}}'>{{dest.days}} روزها</a> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{%endfor%}
+				</div>
+				 <div class="row">
+				 	<div class="col-lg-12">
+				 		<div class="more_place_btn text-center">
+				 			<a class="boxed-btn4" href="#">مکان های بیشتر</a>
+				 		</div>
+				 	</div>
+				 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="newsletter_area overlay">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <div class="newsletter_text">
+                            <h4>مشترک خبرنامه ما شوید</h4>
+                            <p>برای دریافت پیشنهادات و در مورد خبرنامه مشترک شوید مکان های جدید برای کشف</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <form action="/subscribe" method="POST" class="mail_form">
+                            <div class="row no-gutters">
+                                <div class="col-lg-9 col-md-8">
+                                    <div class="newsletter_field">
+                                        {{form.email}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4">
+                                    <div class="newsletter_btn">
+                                        <button class="boxed-btn4" type="submit" aria-label="مشترک شوید">مشترک شوید</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
