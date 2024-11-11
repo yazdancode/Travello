@@ -41,7 +41,7 @@ class RegisterView(View):
         if form.is_valid():
             first_name = form.cleaned_data.get("first_name")
             last_name = form.cleaned_data.get("last_name")
-            username = form.cleaned_data.get("email")  # Use email as username
+            username = form.cleaned_data.get("email")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
 
@@ -116,4 +116,5 @@ class DestinationListView(LoginRequiredMixin, View):
         dest = get_object_or_404(DetailedDescription, dest_id=city_name)
         request.session["price"] = dest.price
         request.session["city"] = city_name
-        return render(request, "sentdex/destination_details.html", {"dest": dest})
+        return render(request, "sentdex/travel_destination.html", {"dest": dest})
+
