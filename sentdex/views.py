@@ -117,4 +117,3 @@ class DestinationListView(LoginRequiredMixin, View):
         request.session["price"] = dest.price
         request.session["city"] = city_name
         return render(request, "sentdex/destination_details.html", {"dest": dest})
-

@@ -1,7 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User  # فرض بر این است که از مدل User استفاده می‌کنید.
+from django.contrib.auth.models import (
+    User,
+)  # فرض بر این است که از مدل User استفاده می‌کنید.
 import re
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(
@@ -92,41 +95,55 @@ class RegisterForm(forms.Form):
         password_to_accept = cleaned_data.get("password_to_accept")
 
         if password != password_to_accept:
-            raise ValidationError("رمزهای عبور با هم مطابقت ندارند.", code='password_mismatch')
+            raise ValidationError(
+                "رمزهای عبور با هم مطابقت ندارند.", code="password_mismatch"
+            )
 
         # افزودن شرایط امنیتی برای رمز عبور
-        if not re.match(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$", password):
+        if not re.match(
+            r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$", password
+        ):
             raise ValidationError(
                 "رمز عبور باید بین ۸ تا ۱۶ کاراکتر باشد و شامل حداقل یک حرف، یک عدد، و یک کاراکتر خاص باشد.",
-                code='password_complexity'
+                code="password_complexity",
             )
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
         if User.objects.filter(username=username).exists():
-            raise ValidationError("این نام کاربری قبلاً ثبت شده است.", code='username_taken')
+            raise ValidationError(
+                "این نام کاربری قبلاً ثبت شده است.", code="username_taken"
+            )
         return username
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
-            raise ValidationError("این ایمیل قبلاً ثبت شده است.", code='email_taken')
+            raise ValidationError("این ایمیل قبلاً ثبت شده است.", code="email_taken")
         return email
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get("first_name")
         if not re.match(r"^[\u0600-\u06FF\s]+$", first_name):
-            raise ValidationError("نام باید فقط شامل حروف فارسی باشد.", code='invalid_first_name')
+            raise ValidationError(
+                "نام باید فقط شامل حروف فارسی باشد.", code="invalid_first_name"
+            )
         return first_name
 
     def clean_last_name(self):
         last_name = self.cleaned_data.get("last_name")
         if not re.match(r"^[\u0600-\u06FF\s\-]+$", last_name):
-            raise ValidationError("نام خانوادگی باید فقط شامل حروف فارسی و خط فاصله باشد.", code='invalid_last_name')
+            raise ValidationError(
+                "نام خانوادگی باید فقط شامل حروف فارسی و خط فاصله باشد.",
+                code="invalid_last_name",
+            )
         return last_name
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get("phone_number")
         if not re.match(r"^\+?(98)?9\d{9}$", phone_number):
-            raise ValidationError("شماره تلفن باید با +98 یا 09 شروع شود و ۱۱ رقم باشد.", code='invalid_phone_number')
+            raise ValidationError(
+                "شماره تلفن باید با +98 یا 09 شروع شود و ۱۱ رقم باشد.",
+                code="invalid_phone_number",
+            )
         return phone_number
