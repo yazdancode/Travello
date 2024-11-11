@@ -89,6 +89,18 @@ class RegisterForm(forms.Form):
         ),
     )
 
+    place = forms.CharField(
+        max_length=256,
+        label="محل",
+        widget=forms.TextInput(
+            attrs={
+                "class": "input--style-4",
+                "type": "text",
+                "placeholder": "کجا بریم؟",
+            }
+        ),
+    )
+
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")

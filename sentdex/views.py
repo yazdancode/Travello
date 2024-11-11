@@ -44,6 +44,7 @@ class RegisterView(View):
             username = form.cleaned_data.get("email")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
+            place = form.cleaned_data.get("place")
 
             if User.objects.filter(username=username).exists():
                 messages.info(request, "نام کاربری قبلاً استفاده شده است")
@@ -58,6 +59,7 @@ class RegisterView(View):
                     email=email,
                     first_name=first_name,
                     last_name=last_name,
+                    place=place,
                 )
                 user.save()
                 messages.success(request, "ثبت نام با موفقیت انجام شد. لطفاً وارد شوید.")
@@ -117,4 +119,3 @@ class DestinationListView(LoginRequiredMixin, View):
         request.session["price"] = dest.price
         request.session["city"] = city_name
         return render(request, "sentdex/travel_destination.html", {"dest": dest})
-
