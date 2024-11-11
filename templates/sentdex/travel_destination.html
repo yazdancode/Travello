@@ -7,6 +7,48 @@
 	<title>سفر کنید</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">  
-	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">   
-	
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+	<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+	<link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" href="{% static 'css/slick.css' %}">
+	<link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">   
 </head>
+<body>
+	<header>
+		<div class="header-area">
+			<div id="sticky-header" class="min-header-area">
+				<div class="container-fluid">
+					<div class="header_bottom_border">
+						<div class="row align-items-center">
+							<div class="col-xl-2 col-lg-2">
+								<div class="logo">
+									<a href="{% url 'index' %}>
+										<img src="{% static 'img/logo.png' %}" alt="">
+									</a>
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6">
+								<div class="main-menu  d-none d-lg-block">
+									<nav>
+										<ul id="navigation">
+											<li><a class="active" href="{% url 'login' %}">خانه</a></li>
+											<li><a href="sentdex/about.html">درباره</a></li>
+											{% if user.is_authenticated %}
+											<li>سلام, {{user.first_name}}</li>
+											<li><a href="{% url 'logout' %}">خروج</a></li>
+											{%else%}
+											<li><a href="{% url 'logout' %}"></a></li>
+											<li><a href="{% url 'register' %}"></a></li>
+											{%endif%}
+											
+
