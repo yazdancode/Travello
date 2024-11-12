@@ -24,7 +24,7 @@
             <div class="container-login100" style="background-image: url('{% static 'images/bg-01.jpg' %}');">
                 <div class="wrap-login100 p-1-55 p-r-55 p-t-65 p-b-54 animate__animated animate__fadeIn">
                     <span class="wrap-login100-form-title p-b-49 animate__animated animate__fadeInDown">
-                        <font color="orange-purple">سفرلو</font>
+                        <span style="background: linear-gradient(to right, orange, purple); -webkit-background-clip: text; color: transparent;">سفرلو</span>
                     </span>
                     <div class="wrap-input100 validate-input m-b-23 animate__animated animate__fadeIn" data-validate="Username is required">
                         <span class="label-input100">نام کاربری</span>
@@ -49,7 +49,8 @@
                         {% endfor %}
                     </div>
                     <div class="flex-col-c p-t-80">
-                        <a href="{% url 'register' %}" class="txt6 animate__animated animate__bounce"><font color="orange">ثبت نام کنید</font></a><br>
+                        <a href="{% url 'register' %}" class="txt6 animate__animated animate__bounce"><span
+                                style="color: orange; ">ثبت نام کنید</span></a><br>
                         <a href="{% url 'register' %}" class="txt2 animate__animated animate__bounce">درباره ما</a>
                         <a href="{% url 'register' %}" class="txt2 animate__animated animate__bounce">تماس با ما</a>
                     </div>

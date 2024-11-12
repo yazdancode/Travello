@@ -1,7 +1,7 @@
 {% load static %} {% static "images" as baseUrl %}
 <doctype html>
 <html class="no-js" lang="fa" dir="auto">
-<head><head>
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>سفر کنید</title>
@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 	<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">   
 </head>
+    <title></title>
 <body>
 	<header>
 		<div class="header-area">
@@ -32,9 +33,9 @@
 						<div class="row align-items-center">
 							<div class="col-xl-2 col-lg-2">
 								<div class="logo">
-									<a href="{% url 'index' %}>
-										 <img src="{% static 'img/logo.png' %}" alt="logo">
-									</a>
+                                    <a href="{% url 'index' %}">
+                                    	<img src="{% static 'img/logo.png' %}" alt="logo">
+                                    </a>
 								</div>
 							</div>
 							<div class="col-xl-6 col-lg-6">
@@ -42,7 +43,7 @@
 									<nav>
 										<ul id="navigation">
 											<li><a class="active" href="{% url 'login' %}">خانه</a></li>
-											<li><a href="sentdex/about.html">درباره</a></li>
+											<li><a href="./about.html">درباره</a></li>
 											{% if user.is_authenticated %}
 											<li>سلام, {{user.first_name}}</li>
 											<li><a href="{% url 'logout' %}">خروج</a></li>
@@ -52,11 +53,11 @@
 											{%endif%}
 											<li><a href="#">وبلاگ< <i class="ti-angle-down"></i></a>
 												<ul class="submenu">
-													<li><a href="sentdex/blog.html">وبلاگ</a></li>
-													<li><a href="sentdex/single-blog.html">تک وبلاگ</a></li>
+													<li><a href="./blog.html">وبلاگ</a></li>
+													<li><a href="./single-blog.html">تک وبلاگ</a></li>
 												</ul>
 											</li>
-											<li><a href="sentdex/contact.html">تماس بگیرید</a></li>
+                                            <li><a href="./contact.html">تماس بگیرید</a></li>
 										</ul>
 									</nav>
 								</div>
@@ -284,8 +285,5 @@
 <footer class="footer">
 	 <div class="footer_top">
 	 	<div class="container">
-	 		
-
-
-
+            
 
