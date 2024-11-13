@@ -1,9 +1,12 @@
 from django.contrib import messages, auth
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from sentdex.forms import RegisterForm
 from sentdex.models import Destination, DetailedDescription
@@ -108,16 +111,27 @@ class LoginView(View):
 
 
 class LogoutView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         logout(request)
         return redirect("index")
 
 
-class DestinationListView(LoginRequiredMixin, View):
-    login_url = "login"
+@method_decorator(login_required(login_url="login"), name="dispatch")
+class DestinationListView(ListView):
+    model = DetailedDescription
+    template_name = "sentdex/travel_destination.html"
+    context_object_name = "dests"
 
-    def get(self, request, city_name):
+    def get_queryset(self):
+        city_name = self.kwargs["city_name"]
+        return DetailedDescription.objects.filter(country=city_name)
+
+
+class DestinationDetailsView(LoginRequiredMixin, View):
+    @staticmethod
+    def get(request, city_name):
         dest = get_object_or_404(DetailedDescription, dest_id=city_name)
         request.session["price"] = dest.price
         request.session["city"] = city_name
-        return render(request, "sentdex/travel_destination.html", {"dest": dest})
+        return render(request, "sentdex/destination_details.html", {"dest": dest})
