@@ -1,6 +1,7 @@
 from django.contrib import messages, auth
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.gis.geos.libgeos import GEOSCoordSeq_t
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,7 +10,9 @@ from django.views import View
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from sentdex.forms import RegisterForm
-from sentdex.models import Destination, DetailedDescription
+from django.forms import formset_factory
+from sentdex.models import Destination, DetailedDescription, PassengerDetail
+from datetime import datetime
 
 
 class DestinationView(View):
@@ -148,3 +151,66 @@ class SearchView(View):
         except DetailedDescription.DoesNotExist:
             messages.info(request, "Place not found")
             return redirect("index")
+
+
+def pessanger_datail_def(request, city_name):
+    RegisterFormSet = formset_factory(RegisterForm, extra=1)
+    if request.method == "POST":
+        formset = RegisterFormSet(request.POST)
+        if formset.is_valid():
+            temp_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
+            date = datetime.now().date()
+            if temp_date < date:
+                return redirect("index")
+
+            obj = PassengerDetail.objects.get(Trip_id=3)
+            pipo_id = obj.trip_reference_id
+            request.session["trip_reference_id"] = pipo_id
+            price = request.session["price"]
+            city = request.session["city"]
+            temp_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
+            usernameget = request.user.get_username()
+            request.session["n"] = formset.total_form_count()
+            for i in range(0, formset.total_form_count()):
+                form = formset.forms[i]
+                t = PassengerDetail(
+                    trip_reference_id=pipo_id,
+                    first_name=form.cleaned_data["first_name"],
+                    last_name=form.cleaned_data["last_name"],
+                    age=form.cleaned_data["age"],
+                    trip_date=temp_date,
+                    payment=price,
+                    username=usernameget,
+                    city=city,
+                )
+                t.save()
+            obj.trip_reference_id = pipo_id + 1
+            obj.save()
+            no_of_person = formset.total_form_count()
+            price = no_of_person * price
+            GST = price * 0.18
+            GST = float("{:.2f}".format(GST))
+            final_total = GST + price
+            request.session["pay_amount"] = final_total
+            return render(
+                request,
+                "sentdex/payment.html",
+                {
+                    "no_of_person": no_of_person,
+                    "price": price,
+                    "GST": GST,
+                    "final_total": final_total,
+                    "city": city,
+                },
+            )
+        else:
+            formset = RegisterFormSet()
+
+            return render(
+                request,
+                "sentdex/sample.html",
+                {
+                    "formset": formset,
+                    "city_name": city_name,
+                },
+            )

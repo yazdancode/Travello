@@ -113,6 +113,8 @@ class RegisterForm(forms.Form):
         ),
     )
 
+    age = forms.IntegerField()
+
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
