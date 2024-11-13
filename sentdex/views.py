@@ -142,8 +142,8 @@ class SearchView(View):
 
     def get(self, request, *args, **kwargs):
         try:
-            placel = request.session.get("place")
-            dest = DetailedDescription.objects.get(dest_name=placel)
+            place = request.session.get("place")
+            dest = DetailedDescription.objects.get(dest_name=place)
             return render(request, self.template_name, {"dest": dest})
         except DetailedDescription.DoesNotExist:
             messages.info(request, "Place not found")
