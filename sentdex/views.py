@@ -45,6 +45,7 @@ class RegisterView(View):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             place = form.cleaned_data.get("place")
+            search = form.cleaned_data.get("search")
 
             if User.objects.filter(username=username).exists():
                 messages.info(request, "نام کاربری قبلاً استفاده شده است")
@@ -60,6 +61,7 @@ class RegisterView(View):
                     first_name=first_name,
                     last_name=last_name,
                     place=place,
+                    search=search,
                 )
                 user.save()
                 messages.success(request, "ثبت نام با موفقیت انجام شد. لطفاً وارد شوید.")

@@ -101,6 +101,18 @@ class RegisterForm(forms.Form):
         ),
     )
 
+    search = forms.CharField(
+        max_length=256,
+        label="جستجو کنید",
+        widget=forms.TextInput(
+            attrs={
+                "class": "input--style-4",
+                "type": "text",
+                "placeholder": "جستجو کنید",
+            }
+        ),
+    )
+
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
