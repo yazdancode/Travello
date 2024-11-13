@@ -135,3 +135,15 @@ class DestinationDetailsView(LoginRequiredMixin, View):
         request.session["price"] = dest.price
         request.session["city"] = city_name
         return render(request, "sentdex/destination_details.html", {"dest": dest})
+
+
+def search(request) -> None:
+    try:
+        placel = request.session.get("place")
+        print(placel)
+        dest = DetailedDescription.objects.get(dest_name=placel)
+        print(dest)
+        return render(request, "sentdex/destination_details.html", {"dest": dest})
+    except:
+        messages.info(request, "Place not found")
+        return redirect("index")
