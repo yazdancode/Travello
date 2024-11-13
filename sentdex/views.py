@@ -153,64 +153,65 @@ class SearchView(View):
             return redirect("index")
 
 
-def pessanger_datail_def(request, city_name):
+class PassengerDetailView(View):
+    template_name = "sentdex/sample.html"
+    payment_template = "sentdex/payment.html"
     RegisterFormSet = formset_factory(RegisterForm, extra=1)
-    if request.method == "POST":
-        formset = RegisterFormSet(request.POST)
-        if formset.is_valid():
-            temp_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
-            date = datetime.now().date()
-            if temp_date < date:
-                return redirect("index")
+    
+    def get(self, request, city_name):
+        formset = self.RegisterFormSet()
+        return render(
+            request,
+            self.template_name,
+            {"formset": formset, "city_name": city_name}
+        )
 
-            obj = PassengerDetail.objects.get(Trip_id=3)
-            pipo_id = obj.trip_reference_id
-            request.session["trip_reference_id"] = pipo_id
-            price = request.session["price"]
-            city = request.session["city"]
-            temp_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
-            usernameget = request.user.get_username()
+    def post(self, request, city_name):
+        formset = self.RegisterFormSet(request.POST)
+        if formset.is_valid():
+            trip_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
+            current_date = datetime.now().date()
+
+            if trip_date < current_date:
+                return redirect("index")
+            trip_obj = PassengerDetail.objects.get(Trip_id=3)
+            request.session["trip_reference_id"] = trip_obj.trip_reference_id
             request.session["n"] = formset.total_form_count()
-            for i in range(0, formset.total_form_count()):
-                form = formset.forms[i]
-                t = PassengerDetail(
-                    trip_reference_id=pipo_id,
+            price = request.session.get("price", 0)
+            city = request.session.get("city", city_name)
+            username = request.user.get_username()
+            for form in formset:
+                PassengerDetail.objects.create(
+                    trip_reference_id=trip_obj.trip_reference_id,
                     first_name=form.cleaned_data["first_name"],
                     last_name=form.cleaned_data["last_name"],
                     age=form.cleaned_data["age"],
-                    trip_date=temp_date,
+                    trip_date=trip_date,
                     payment=price,
-                    username=usernameget,
+                    username=username,
                     city=city,
                 )
-                t.save()
-            obj.trip_reference_id = pipo_id + 1
-            obj.save()
-            no_of_person = formset.total_form_count()
-            price = no_of_person * price
-            GST = price * 0.18
-            GST = float("{:.2f}".format(GST))
-            final_total = GST + price
+            trip_obj.trip_reference_id += 1
+            trip_obj.save()
+            num_persons = formset.total_form_count()
+            total_price = num_persons * price
+            gst = round(total_price * 0.18, 2)
+            final_total = total_price + gst
             request.session["pay_amount"] = final_total
             return render(
                 request,
-                "sentdex/payment.html",
+                self.payment_template,
                 {
-                    "no_of_person": no_of_person,
-                    "price": price,
-                    "GST": GST,
+                    "no_of_person": num_persons,
+                    "price": total_price,
+                    "GST": gst,
                     "final_total": final_total,
                     "city": city,
-                },
+                }
             )
         else:
-            formset = RegisterFormSet()
-
             return render(
                 request,
-                "sentdex/sample.html",
-                {
-                    "formset": formset,
-                    "city_name": city_name,
-                },
+                self.template_name,
+                {"formset": formset, "city_name": city_name}
             )
