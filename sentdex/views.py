@@ -12,7 +12,14 @@ from django.views import View
 from django.views.generic import ListView
 from django.core.mail import send_mail
 from sentdex.forms import RegisterForm
-from sentdex.models import Destination, DetailedDescription, PassengerDetail, Card
+from sentdex.models import (
+    Destination,
+    DetailedDescription,
+    PassengerDetail,
+    Card,
+    NetBanking,
+    Transaction,
+)
 
 import random
 
@@ -276,3 +283,53 @@ class CardPaymentView(View):
             return render(request, "sentdex/wrongdata.html")
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
+class NetBankingPaymentView(View):
+    template_success = "sentdex/confirmetion_page.html"
+    template_error = "sentdex/wrongdata.html"
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get("cardNumber")
+        password = request.POST.get("pass")
+        bank_name = request.POST.get("banks")
+        username_get = request.user.get_username()
+        trip_same_id = request.session.get("trip_reference_id")
+        amt = int(request.session.get("pay_amount", 0))
+        pay_method = "Net Banking"
+
+        try:
+            net_banking_account = NetBanking.objects.get(
+                username=username, password=password, Bank=bank_name
+            )
+            balance = net_banking_account.balance
+            request.session["total_balance"] = balance
+
+            if int(balance) >= amt:
+                remaining_balance = balance - amt
+                net_banking_account.balance = remaining_balance
+                net_banking_account.save(update_fields=["balance"])
+                transaction = Transaction(
+                    username=username,
+                    trip_reference_id=trip_same_id,
+                    amount=amt,
+                    payment_method=pay_method,
+                    status="Successful",
+                )
+                transaction.save()
+
+                return render(request, self.template_success)
+
+            else:
+                transaction = Transaction(
+                    username=username_get,
+                    trip_reference_id=trip_same_id,
+                    amount=amt,
+                    payment_method=pay_method,
+                    status="Failed",
+                )
+                transaction.save()
+
+                return render(request, self.template_error)
+
+        except NetBanking.DoesNotExist:
+            return render(request, self.template_error)
