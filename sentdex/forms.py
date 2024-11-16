@@ -112,7 +112,7 @@ class RegisterForm(forms.Form):
             }
         ),
     )
-    
+
     age = forms.IntegerField()
 
     def clean(self):

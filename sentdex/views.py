@@ -1,18 +1,18 @@
+from datetime import datetime
 from django.contrib import messages, auth
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.gis.geos.libgeos import GEOSCoordSeq_t
-from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.forms import formset_factory
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from sentdex.forms import RegisterForm
-from django.forms import formset_factory
 from sentdex.models import Destination, DetailedDescription, PassengerDetail
-from datetime import datetime
 
 
 class DestinationView(View):
@@ -157,13 +157,11 @@ class PassengerDetailView(View):
     template_name = "sentdex/sample.html"
     payment_template = "sentdex/payment.html"
     RegisterFormSet = formset_factory(RegisterForm, extra=1)
-    
+
     def get(self, request, city_name):
         formset = self.RegisterFormSet()
         return render(
-            request,
-            self.template_name,
-            {"formset": formset, "city_name": city_name}
+            request, self.template_name, {"formset": formset, "city_name": city_name}
         )
 
     def post(self, request, city_name):
@@ -171,11 +169,11 @@ class PassengerDetailView(View):
         if formset.is_valid():
             trip_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
             current_date = datetime.now().date()
-
             if trip_date < current_date:
                 return redirect("index")
             trip_obj = PassengerDetail.objects.get(Trip_id=3)
             request.session["trip_reference_id"] = trip_obj.trip_reference_id
+
             request.session["n"] = formset.total_form_count()
             price = request.session.get("price", 0)
             city = request.session.get("city", city_name)
@@ -207,11 +205,19 @@ class PassengerDetailView(View):
                     "GST": gst,
                     "final_total": final_total,
                     "city": city,
-                }
+                },
             )
         else:
             return render(
                 request,
                 self.template_name,
-                {"formset": formset, "city_name": city_name}
+                {"formset": formset, "city_name": city_name},
             )
+
+
+def upcoming_trips(request) -> None:
+    username = request.user.get_username()
+    date = datetime.now().date()
+    person = PassengerDetail.objects.all().filter(username=username).filter(pay_done=1)
+    person = person.filter(Trip_date__gte=date1)
+    return render(request, "sentdex/upcoming trip1.html", {"person": person})

@@ -1,62 +1,143 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
+  <head>
     <title>اینجا وارد شوید</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/util1.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css' %}">
-</head>
-<body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.ico' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/animate/animate.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/animsition/css/animsition.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/select2/select2.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/daterangepicker/daterangepicker.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/util1.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/main1.css' %}"
+    />
+  </head>
+  <body>
     <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <div class="limiter">
-            <div class="container-login100" style="background-image: url('{% static 'images/bg-01.jpg' %}');">
-                <div class="wrap-login100 p-1-55 p-r-55 p-t-65 p-b-54 animate__animated animate__fadeIn">
-                    <span class="wrap-login100-form-title p-b-49 animate__animated animate__fadeInDown">
-                        <span style="background: linear-gradient(to right, orange, purple); -webkit-background-clip: text; color: transparent;">سفرلو</span>
-                    </span>
-                    <div class="wrap-input100 validate-input m-b-23 animate__animated animate__fadeIn" data-validate="Username is required">
-                        <span class="label-input100">نام کاربری</span>
-                        {{ form.username }}
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input animate__animated animate__fadeIn" data-validate="Password is required">
-                        <span class="label-input100">رمز عبور</span>
-                        {{ form.password }}
-                        <span class="focus-input100" data-symbol="&#xf190;"></span>
-                    </div>
-                    <div class="text-right p-t-8 p-b-31"></div>
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn animate__animated animate__pulse animate__infinite">وارد شوید</button>
-                        </div>
-                    </div>
-                    <div>
-                        {% for message in messages %}
-                            <h4 class="message success animate__animated animate__fadeIn">{{ message }}</h4>
-                        {% endfor %}
-                    </div>
-                    <div class="flex-col-c p-t-80">
-                        <a href="{% url 'register' %}" class="txt6 animate__animated animate__bounce"><span
-                                style="color: orange; ">ثبت نام کنید</span></a><br>
-                        <a href="{% url 'register' %}" class="txt2 animate__animated animate__bounce">درباره ما</a>
-                        <a href="{% url 'register' %}" class="txt2 animate__animated animate__bounce">تماس با ما</a>
-                    </div>
-                </div>
+      {% csrf_token %}
+      <div class="limiter">
+        <div
+          class="container-login100"
+          style="background-image: url('{% static 'images/bg-01.jpg' %}')"
+        >
+          <div
+            class="wrap-login100 p-1-55 p-r-55 p-t-65 p-b-54 animate__animated animate__fadeIn"
+          >
+            <span
+              class="wrap-login100-form-title p-b-49 animate__animated animate__fadeInDown"
+            >
+              <span
+                style="
+                  background: linear-gradient(to right, orange, purple);
+                  -webkit-background-clip: text;
+                  color: transparent;
+                "
+                >سفرلو</span
+              >
+            </span>
+            <div
+              class="wrap-input100 validate-input m-b-23 animate__animated animate__fadeIn"
+              data-validate="Username is required"
+            >
+              <span class="label-input100">نام کاربری</span>
+              {{ form.username }}
+              <span class="focus-input100" data-symbol="&#xf190;"></span>
             </div>
+            <div
+              class="wrap-input100 validate-input animate__animated animate__fadeIn"
+              data-validate="Password is required"
+            >
+              <span class="label-input100">رمز عبور</span>
+              {{ form.password }}
+              <span class="focus-input100" data-symbol="&#xf190;"></span>
+            </div>
+            <div class="text-right p-t-8 p-b-31"></div>
+            <div class="container-login100-form-btn">
+              <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <button
+                  class="login100-form-btn animate__animated animate__pulse animate__infinite"
+                >
+                  وارد شوید
+                </button>
+              </div>
+            </div>
+            <div>
+              {% for message in messages %}
+              <h4 class="message success animate__animated animate__fadeIn">
+                {{ message }}
+              </h4>
+              {% endfor %}
+            </div>
+            <div class="flex-col-c p-t-80">
+              <a
+                href="{% url 'register' %}"
+                class="txt6 animate__animated animate__bounce"
+                ><span style="color: orange">ثبت نام کنید</span></a
+              ><br />
+              <a
+                href="{% url 'register' %}"
+                class="txt2 animate__animated animate__bounce"
+                >درباره ما</a
+              >
+              <a
+                href="{% url 'register' %}"
+                class="txt2 animate__animated animate__bounce"
+                >تماس با ما</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </form>
     <div id="dropDownSelect1"></div>
     <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
@@ -68,5 +149,5 @@
     <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
     <script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
     <script src="{% static 'js/main1.js' %}"></script>
-</body>
+  </body>
 </html>
