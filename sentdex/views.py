@@ -215,9 +215,10 @@ class PassengerDetailView(View):
             )
 
 
-def upcoming_trips(request) -> None:
-    username = request.user.get_username()
-    date = datetime.now().date()
-    person = PassengerDetail.objects.all().filter(username=username).filter(pay_done=1)
-    person = person.filter(Trip_date__gte=date1)
-    return render(request, "sentdex/upcoming trip1.html", {"person": person})
+class UpcomingTripsView(View):
+    def get(self, request, *args, **kwargs):
+        username = request.user.get_username()
+        data = datetime.now().date()
+        person = PassengerDetail.objects.filter(username=username, pay_done=1, Trip_date__gte=date)
+        return render(request, "sentdex/upcoming_trip1.html", {"person": person})
+        
