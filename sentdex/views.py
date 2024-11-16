@@ -10,9 +10,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import ListView
-
+from django.core.mail import send_mail
 from sentdex.forms import RegisterForm
-from sentdex.models import Destination, DetailedDescription, PassengerDetail
+from sentdex.models import Destination, DetailedDescription, PassengerDetail, Card
+
+import random
 
 
 class DestinationView(View):
@@ -216,9 +218,61 @@ class PassengerDetailView(View):
 
 
 class UpcomingTripsView(View):
+    template_name = "sentdex/upcoming_trip.html"
+
     def get(self, request, *args, **kwargs):
         username = request.user.get_username()
         data = datetime.now().date()
-        person = PassengerDetail.objects.filter(username=username, pay_done=1, Trip_date__gte=date)
-        return render(request, "sentdex/upcoming_trip1.html", {"person": person})
-        
+        person = PassengerDetail.objects.filter(
+            username=username, pay_done=1, Trip_date__gte=data
+        )
+        return render(request, self.template_name, {"person": person})
+
+
+class CardPaymentView(View):
+    @method_decorator(login_required(login_url="login"))
+    def post(self, request, *args, **kwargs):
+        card_no = request.POST.get("card_number")
+        pay_method = "Debit card"
+        MM = request.POST.get("MM")
+        YY = request.POST.get("YY")
+        CVV = request.POST.get("cvv")
+        request.session["dcard"] = card_no
+
+        try:
+            card = Card.objects.get(
+                card_number=card_no,
+                expiry_month=MM,
+                expiry_year=YY,
+                cvv=CVV,
+            )
+            balance = card.balance
+            request.session["total_balance"] = balance
+            mail1 = card.email
+
+            if int(balance) >= int(request.session.get("pay_amount", 0)):
+                rno = random.randint(100000, 999999)
+                request.session["OTP"] = rno
+                amt = request.session["pay_amount"]
+                username = request.user.get_username()
+                user = User.objects.get(username=username)
+                mail_id = user.email
+                msg = f"Your OTP For Payment of ₹{amt} is {rno}"
+
+                send_mail(
+                    "OTP for Debit card Payment",
+                    msg,
+                    "yshabanei@gmail.com",
+                    [mail_id],
+                    fail_silently=False,
+                )
+                return render(request, "sentdex/OTP.html")
+            else:
+                messages.error(request, "موجودی کافی نیست.")
+                return render(request, "sentdex/wrongdata.html")
+
+        except Card.DoesNotExist:
+            messages.error(request, "اطلاعات کارت نادرست است.")
+            return render(request, "sentdex/wrongdata.html")
+
+
