@@ -38,7 +38,11 @@ class RegisterForm(forms.Form):
         max_length=16,
         label="رمز عبور",
         widget=forms.PasswordInput(
-            attrs={"class": "input--style-4", "type": "password", "placeholder": "رمز عبور"}
+            attrs={
+                "class": "input--style-4",
+                "type": "password",
+                "placeholder": "رمز عبور",
+            }
         ),
     )
     password_to_accept = forms.CharField(
@@ -102,17 +106,23 @@ class RegisterForm(forms.Form):
             raise ValidationError("رمز عبور نمی‌تواند خالی باشد.", code="empty_password")
 
         if password != password_to_accept:
-            raise ValidationError("رمزهای عبور با هم مطابقت ندارند.", code="password_mismatch")
+            raise ValidationError(
+                "رمزهای عبور با هم مطابقت ندارند.", code="password_mismatch"
+            )
 
         if not re.match(
             r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$", password
         ):
-            raise ValidationError("رمز عبور باید پیچیدگی لازم را داشته باشد.", code="password_complexity")
+            raise ValidationError(
+                "رمز عبور باید پیچیدگی لازم را داشته باشد.", code="password_complexity"
+            )
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
         if User.objects.filter(username=username).exists():
-            raise ValidationError("این نام کاربری قبلاً ثبت شده است.", code="username_taken")
+            raise ValidationError(
+                "این نام کاربری قبلاً ثبت شده است.", code="username_taken"
+            )
         return username
 
     def clean_email(self):
@@ -124,7 +134,9 @@ class RegisterForm(forms.Form):
     def clean_first_name(self):
         first_name = self.cleaned_data.get("first_name")
         if not re.match(r"^[\u0600-\u06FF\s]+$", first_name):
-            raise ValidationError("نام باید فقط شامل حروف فارسی باشد.", code="invalid_first_name")
+            raise ValidationError(
+                "نام باید فقط شامل حروف فارسی باشد.", code="invalid_first_name"
+            )
         return first_name
 
     def clean_last_name(self):
@@ -136,7 +148,9 @@ class RegisterForm(forms.Form):
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get("phone_number")
         if not re.match(r"^\+?(98)?9\d{9}$", phone_number):
-            raise ValidationError("شماره تلفن نامعتبر است.", code="invalid_phone_number")
+            raise ValidationError(
+                "شماره تلفن نامعتبر است.", code="invalid_phone_number"
+            )
         return phone_number
 
     def clean_age(self):
@@ -144,4 +158,3 @@ class RegisterForm(forms.Form):
         if age < 18 or age > 100:
             raise ValidationError("سن باید بین ۱۸ تا ۱۰۰ سال باشد.", code="invalid_age")
         return age
-

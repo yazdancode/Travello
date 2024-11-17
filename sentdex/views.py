@@ -20,7 +20,6 @@ from sentdex.models import (
     NetBanking,
     Transaction,
 )
-
 import random
 
 
