@@ -7,6 +7,12 @@ from sentdex.views import (
     LogoutView,
     RegisterView,
     SearchView,
+    DestinationDetailsView,
+    PassengerDetailView,
+    UpcomingTripsView,
+    CardPaymentView,
+    OTPVerificationView,
+    NetBankingPaymentView,
 )
 
 urlpatterns = [
@@ -20,6 +26,35 @@ urlpatterns = [
         name="destination_list",
     ),
     path("search/", SearchView.as_view(), name="search"),
-
-
+    path(
+        "destination_list/destination_details/<str:city_name>",
+        DestinationDetailsView.as_view(),
+        name="destination_details",
+    ),
+    path(
+        "destination_details/<str:city_name>",
+        DestinationDetailsView.as_view(),
+        name="destination_details",
+    ),
+    path(
+        "destination_list/destination_details/pessanger_detail_def/<str:city_name>",
+        PassengerDetailView.as_view(),
+        name="pessanger_detail_def",
+    ),
+    path("upcoming_trips", UpcomingTripsView.as_view(), name="upcoming_trips"),
+    path(
+        "destination_list/destination_details/pessanger_detail_def/pessanger_detail_def/card_payment",
+        CardPaymentView.as_view(),
+        name="card_payment",
+    ),
+    path(
+        "destination_list/destination_details/pessanger_detail_def/pessanger_detail_def/otp_verification",
+        OTPVerificationView.as_view(),
+        name="otp_verification",
+    ),
+    path(
+        "destination_list/destination_details/pessanger_detail_def/pessanger_detail_def/net_payment",
+        NetBankingPaymentView.as_view(),
+        name="net_payment",
+    ),
 ]
