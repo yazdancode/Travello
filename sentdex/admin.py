@@ -1,13 +1,14 @@
 from django.contrib import admin
+
 from sentdex.models import (
+    Card,
+    DailyPlan,
     Destination,
     DestinationImage,
     DetailedDescription,
     DetailedDescriptionImage,
-    DailyPlan,
-    PassengerDetail,
-    Card,
     NetBanking,
+    PassengerDetail,
     Transaction,
 )
 

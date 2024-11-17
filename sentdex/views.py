@@ -1,26 +1,29 @@
+import random
 from datetime import datetime
-from django.contrib import messages, auth
+
+from django.contrib import auth, messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.forms import formset_factory
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import ListView
-from django.core.mail import send_mail
+from django.views.generic.edit import FormView
+
 from sentdex.forms import RegisterForm
 from sentdex.models import (
+    Card,
     Destination,
     DetailedDescription,
-    PassengerDetail,
-    Card,
     NetBanking,
+    PassengerDetail,
     Transaction,
 )
-import random
 
 
 class DestinationView(View):
@@ -154,7 +157,7 @@ class SearchView(View):
     def get(self, request, *args, **kwargs):
         try:
             place = request.session.get("place")
-            dest = DetailedDescription.objects.get(dest_name=place)
+            dest = DetailedDescription.objects.get(name=place)
             return render(request, self.template_name, {"dest": dest})
         except DetailedDescription.DoesNotExist:
             messages.info(request, "Place not found")
@@ -248,6 +251,7 @@ class CardPaymentView(View):
         try:
             card = Card.objects.get(
                 card_number=card_no,
+                pay_method=pay_method,
                 expiry_month=MM,
                 expiry_year=YY,
                 cvv=CVV,
@@ -332,3 +336,64 @@ class NetBankingPaymentView(View):
 
         except NetBanking.DoesNotExist:
             return render(request, self.template_error)
+
+
+class OTPVerificationView(LoginRequiredMixin, FormView):
+    login_url = "login"
+    template_name = "sentdex/otp_verification.html"
+    success_url = "/confirmation/"
+
+    def post(self, request, *args, **kwargs):
+        try:
+            otp = int(request.POST.get("otp"))
+            usernameget = request.user.get_username()
+            trip_reference_id = request.session.get("trip_reference_id")
+            amt = int(request.session.get("pay_amount", 0))
+            pay_method = "Debit card"
+            if otp == int(request.session.get("OTP", 0)):
+                del request.session["OTP"]
+                total_balance = int(request.session.get("total_balance", 0))
+                rem_balance = total_balance - amt
+                card = Card.objects.get(card_number=request.session.get("dcard"))
+                card.Balance = rem_balance
+                card.save(update_fields=["balance"])
+                transaction = Transaction(
+                    username=usernameget,
+                    trip_reference_id=trip_reference_id,
+                    amount=amt,
+                    payment_method=pay_method,
+                    status="Successful",
+                )
+                transaction.save()
+                passengers = PassengerDetail.objects.filter(
+                    trip_reference_id=trip_reference_id
+                )
+                for passenger in passengers:
+                    passenger.pay_done = 1
+                    passenger.save(update_fields=["pay_done"])
+
+                return render(request, "sentdex/confirmation_page.html")
+            else:
+                transaction = Transaction(
+                    username=usernameget,
+                    trip_reference_id=trip_reference_id,
+                    amount=amt,
+                    payment_method=pay_method,
+                    status="Failed",
+                )
+                transaction.save()
+
+                return render(request, "sentdex/wrong_OTP.html")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {str(e)}")
+            return redirect("otp_verification")
+
+
+class DataFetchView(LoginRequiredMixin, ListView):
+    login_url = "login"
+    template_name = "sentdex/passenger_detail.html"
+    context_object_name = "passenger_details"
+
+    def get_queryset(self):
+        username = self.request.user.get_username()
+        return PassengerDetail.objects.filter(username=username)

@@ -1,11 +1,12 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
 from sentdex.views import (
+    DestinationListView,
     DestinationView,
-    RegisterView,
     LoginView,
     LogoutView,
-    DestinationListView,
+    RegisterView,
+    SearchView,
 )
 
 urlpatterns = [
@@ -14,8 +15,11 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path(
-        "destination_list/<str:city_name",
+        "destination_list/<str:city_name>/",
         DestinationListView.as_view(),
         name="destination_list",
     ),
+    path("search/", SearchView.as_view(), name="search"),
+
+
 ]
