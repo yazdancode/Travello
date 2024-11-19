@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from typing import Any
 
 
 class Destination(models.Model):
@@ -122,6 +123,10 @@ class Card(models.Model):
     email = models.EmailField(
         max_length=50, default="yshabanei@gmail.com", verbose_name="ایمیل"
     )
+
+    def __init__(self, *args: Any, **kwargs: Any):
+        super().__init__(args, kwargs)
+        self.balance = None
 
     def __str__(self):
         return f"{self.card_number} - {self.email}"

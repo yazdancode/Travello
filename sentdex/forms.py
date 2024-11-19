@@ -101,6 +101,18 @@ class RegisterForm(forms.Form):
             attrs={"type": "number", "name": "otp", "placeholder": "Enter OTP"}
         ),
     )
+    trip_date = forms.DateField(
+        label="تاریخ سفر",
+        widget=forms.DateInput(
+            attrs={
+                "class": "input--style-4",
+                "type": "date",
+                "id": "trip_date",
+                "name": "trip_date",
+                "placeholder": "تاریخ سفر",
+            }
+        ),
+    )
 
     def clean(self):
         cleaned_data = super().clean()
