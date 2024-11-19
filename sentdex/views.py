@@ -12,7 +12,7 @@ from django.forms import formset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormView
 
 from sentdex.forms import RegisterForm
@@ -397,3 +397,39 @@ class DataFetchView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         username = self.request.user.get_username()
         return PassengerDetail.objects.filter(username=username)
+
+
+class AboutView(TemplateView):
+    template_name = "sentdex/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "About Us"
+        return context
+
+
+class BlogView(TemplateView):
+    template_name = "sentdex/blog.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Blog Us"
+        return context
+
+
+class SingleBlogView(TemplateView):
+    template_name = "sentdex/single-blog.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Single Blog US"
+        return context
+
+
+class ContactView(TemplateView):
+    template_name = "sentdex/contact.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Single Blog US"
+        return context

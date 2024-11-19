@@ -13,6 +13,10 @@ from sentdex.views import (
     CardPaymentView,
     OTPVerificationView,
     NetBankingPaymentView,
+    AboutView,
+    BlogView,
+    SingleBlogView,
+    ContactView,
 )
 
 urlpatterns = [
@@ -57,4 +61,8 @@ urlpatterns = [
         NetBankingPaymentView.as_view(),
         name="net_payment",
     ),
+    path("about/", AboutView.as_view(), name="about"),
+    path("blog/", BlogView.as_view(), name="blog"),
+    path("single-blog/", SingleBlogView.as_view(), name="single-blog"),
+    path("contact/", ContactView.as_view(), name="contact"),
 ]

@@ -98,13 +98,10 @@ class RegisterForm(forms.Form):
     otp = forms.CharField(
         label="OTP",
         widget=forms.TextInput(
-            attrs={
-                "type": "number",
-                "name": "otp",
-                "placeholder": "Enter OTP"
-            }
-        )
+            attrs={"type": "number", "name": "otp", "placeholder": "Enter OTP"}
+        ),
     )
+
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")

@@ -1,0 +1,40 @@
+/* تنظیمات اولیه برای حذف حاشیه‌ها و بهبود استایل پایه */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Vazir', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  direction: rtl; /* تنظیم زبان به راست‌چین */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #ff5722;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* استایل‌دهی برای ریسپانسیو */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
