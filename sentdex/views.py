@@ -221,7 +221,7 @@ class PassengerDetailView(View):
         else:
             return render(
                 request,
-                self.template_name,
+                self.payment_template,
                 {"formset": formset, "city_name": city_name},
             )
 

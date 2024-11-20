@@ -1,5 +1,6 @@
 import re
-
+from jalali_date.fields import JalaliDateField
+from jalali_date.widgets import AdminJalaliDateWidget
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -118,9 +119,9 @@ class RegisterForm(forms.Form):
             attrs={"type": "number", "name": "otp", "placeholder": "Enter OTP"}
         ),
     )
-    trip_date = forms.DateField(
+    trip_date = JalaliDateField(
         label="تاریخ سفر",
-        widget=forms.DateInput(
+        widget=AdminJalaliDateWidget(
             attrs={
                 "class": "input--style-4",
                 "type": "date",

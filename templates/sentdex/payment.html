@@ -3,7 +3,7 @@
 <html lang="fa" dir="rtl">
 <head>
     <title>صفحه پرداخت</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/pa.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'sentdex/img/pa.png' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
@@ -15,12 +15,12 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <link href="{% static 'newcss/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all">
-    <link href="{% static 'newcss/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="{% static 'newcss/shop.css' %}" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{% static 'newcss/checkout.css' %}">
-    <link href="{% static 'newcss/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css' />
-    <link href="{% static 'newcss/style.css' %}" rel='stylesheet' type='text/css' media="all">
+    <link href="{% static 'sentdex/newcss/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static 'sentdex/newcss/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'sentdex/newcss/shop.css' %}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/newcss/checkout.css' %}">
+    <link href="{% static 'sentdex/newcss/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css' />
+    <link href="{% static 'sentdex/newcss/style.css' %}" rel='stylesheet' type='text/css' media="all">
     <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <style>
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="tab2">
                                     <div class="pay_info">
-                                        <form action="{% url 'pessanger_detail_def/card_payment' %}" method="POST" class="creditly-card-form agileinfo_form">
+                                        <form action="{% url 'card_payment' %}" method="POST" class="creditly-card-form agileinfo_form">
                                             {% csrf_token %}
                                             <section class="creditly-wrapper wthree, w3_agileits_wrapper">
                                                 <label>نام روی کارت</label><br>
@@ -162,11 +162,11 @@
                                 <div class="tab4">
                                     <div class="row pay_info">
                                         <div class="col-md-6 tab-grid">
-                                            <img class="pp-img" src="{% static 'images/paypal.png' %}" alt="PayPal logo" title="PayPal payment option">
+                                            <img class="pp-img" src="{% static 'sentdex/images/paypal.png' %}" alt="PayPal logo" title="PayPal payment option">
                                             <p>مهم: شما به وب سایت PayPal هدایت می شوید تا پرداخت خود را ایمن انجام دهید.</p>
                                         </div>
                                         <div class="col-md-6">
-                                            <form action="{% url 'pessanger_detail_def/card_payment' %}" method="POST" class="cc-form">
+                                            <form action="{% url 'card_payment' %}" method="POST" class="cc-form">
                                                 {% csrf_token %}
                                                 <label>شماره کارت</label>
                                                 <label>
@@ -223,8 +223,8 @@
         </div>
     </div>
 </div>
-<script src="{% static 'newjs/jquery-2.2.3.min.js' %}"></script>
-<script src="{% static 'newjs/minicart.js' %}"></script>
+<script src="{% static 'sentdex/newjs/jquery-2.2.3.min.js' %}"></script>
+<script src="{% static 'sentdex/newjs/minicart.js' %}"></script>
 <script>
     toys.render();
     toys.cart.on('toys_checkout', function () {
@@ -236,7 +236,7 @@
         }
         });
 </script>
-<script src="{% static 'newjs/easy-responsive-tabs.js' %}"></script>
+<script src="{% static 'sentdex/newjs/easy-responsive-tabs.js' %}"></script>
 <script>
     $(document).ready(function () {
         $('#horizontalTab').easyResponsiveTabs({
@@ -260,8 +260,8 @@
         });
     });
     </script>
-    <script src="{% static 'newjs/creditly.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'newcss/creditly.css' %}" type="text/css" media="all" />
+    <script src="{% static 'sentdex/newjs/creditly.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'sentdex/newcss/creditly.css' %}" type="text/css" media="all" />
     <script>
         $(function () {
             let creditly = Creditly.initialize(
@@ -278,8 +278,8 @@
             });
         });
     </script>
-    <script src="{% static 'newjs/move-top.js' %}"></script>
-    <script src="{% static 'newjs/easing.js' %}"></script>
+    <script src="{% static 'sentdex/newjs/move-top.js' %}"></script>
+    <script src="{% static 'sentdex//easing.js' %}"></script>
     <script>
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -303,7 +303,7 @@
                 });
             });
 </script>
-<script src="{% static 'newjs/bootstrap.min.js' %}"></script>
+<script src="{% static 'sentdex/newjs/bootstrap.min.js' %}"></script>
 </body>
 </html>
 
