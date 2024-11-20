@@ -184,6 +184,8 @@ body {
 }
 
 
+
+
     </style>
 </head>
 
@@ -242,8 +244,16 @@ body {
                             <!-- جستجو -->
                             <div class="search-box">
                                 <form action="#" method="GET">
-                                    <input type="text" placeholder="جستجو کنید...">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                    {% csrf_token %}
+                                    {{ formset.management_form }}
+                                    {% for form in formset %}
+                                    <div class="form">
+                                          {{ form.search.label_tag }}
+                                          {{ form.search }}
+                                        </div>
+                                    {% endfor %}
+
+                                    <button type="submit"><i class=""></i></button>
                                 </form>
                             </div>
                             <!-- شبکه‌های اجتماعی -->
@@ -263,6 +273,15 @@ body {
 
     <form method="POST" action="{% url 'pessanger_detail_def' city_name='تهران' %}">
         {% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+        <div class="form">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+            {{ form.last_name }}
+            {{ form.age }}
+        </div>
+        {% endfor %}
         <br>
         <input type="submit" id="button" value="ارسال کنید">
     </form>
@@ -273,6 +292,7 @@ body {
             <div class="modal-content"></div>
         </div>
     </div>
+
     <script src="{% static 'sentdex/js/vendor/modernizr-3.5.0.min.js' %}"></script>
     <script src="{% static 'sentdex/js/vendor/jquery-1.12.4.min.js' %}"></script>
     <script src="{% static 'sentdex/js/popper.min.js' %}"></script>

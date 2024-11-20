@@ -128,7 +128,7 @@ class LogoutView(View):
     @staticmethod
     def get(request):
         logout(request)
-        return redirect("index")
+        return redirect("home")
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
@@ -161,7 +161,7 @@ class SearchView(View):
             return render(request, self.template_name, {"dest": dest})
         except DetailedDescription.DoesNotExist:
             messages.info(request, "Place not found")
-            return redirect("index")
+            return redirect("home")
 
 
 class PassengerDetailView(View):
@@ -181,7 +181,7 @@ class PassengerDetailView(View):
             trip_date = datetime.strptime(request.POST["trip_date"], "%Y-%m-%d").date()
             current_date = datetime.now().date()
             if trip_date < current_date:
-                return redirect("index")
+                return redirect("home")
             trip_obj = PassengerDetail.objects.get(Trip_id=3)
             request.session["trip_reference_id"] = trip_obj.trip_reference_id
 

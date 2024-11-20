@@ -16,19 +16,26 @@ class RegisterForm(forms.Form):
     )
     first_name = forms.CharField(
         max_length=255,
-        label="نام",
+        label="",
         widget=forms.TextInput(
-            attrs={"class": "input--style-4", "type": "text", "placeholder": "نام"}
+            attrs={
+                "class": "input--style-4 stylish-input",
+                "type": "text",
+                "placeholder": "نام",
+                "style": "width: 150px; padding: 10px; font-size: 16px; border-radius: 10px; border: 2px solid #4CAF50; transition: all 0.3s ease; .input--style-4 { width: 100%; padding: 10px; font-size: 16px; border-radius: 10px; border: 2px solid #4CAF50; transition: all 0.3s ease;} .input--style-4:focus { border-color: #2196F3; box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);} .stylish-input::placeholder { color: #888; font-style: italic;}",
+            }
         ),
     )
+
     last_name = forms.CharField(
         max_length=255,
-        label="نام خانوادگی",
+        label="",
         widget=forms.TextInput(
             attrs={
                 "class": "input--style-4",
                 "type": "text",
                 "placeholder": "نام خانوادگی",
+                "style": "width: 150px; padding: 10px; font-size: 16px; border-radius: 10px; border: 2px solid #4CAF50; transition: all 0.3s ease; .input--style-4 { width: 100%; padding: 10px; font-size: 16px; border-radius: 10px; border: 2px solid #4CAF50; transition: all 0.3s ease;} .input--style-4:focus { border-color: #2196F3; box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);} .stylish-input::placeholder { color: #888; font-style: italic;}",
             }
         ),
     )
@@ -84,12 +91,12 @@ class RegisterForm(forms.Form):
     )
     search = forms.CharField(
         max_length=256,
-        label="جستجو",
+        label="",
         widget=forms.TextInput(
             attrs={
                 "class": "input--style-4",
                 "type": "text",
-                "placeholder": "جستجو",
+                "placeholder": "جستجو کنید...",
                 "style": "width :150px; font-size: 14px;",
             }
         ),
@@ -97,7 +104,12 @@ class RegisterForm(forms.Form):
     age = forms.IntegerField(
         label="سن",
         widget=forms.NumberInput(
-            attrs={"class": "input--style-4", "type": "number", "placeholder": "سن"}
+            attrs={
+                "class": "input--style-4",
+                "type": "number",
+                "placeholder": "سن",
+                "style": "width: 150px; padding: 10px; font-size: 16px; border-radius: 10px; border: 2px solid #4CAF50; transition: all 0.3s ease; .input--style-4 { width: 100%; padding: 10px; font-size: 16px; border-radius: 10px; border: 2px solid #4CAF50; transition: all 0.3s ease;} .input--style-4:focus { border-color: #2196F3; box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);} .stylish-input::placeholder { color: #888; font-style: italic;}",
+            }
         ),
     )
     otp = forms.CharField(
