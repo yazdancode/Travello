@@ -2,27 +2,21 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <title>صفحه پرداخت</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'sentdex/img/pa.png' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <link href="{% static 'sentdex/newcss/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all">
-    <link href="{% static 'sentdex/newcss/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css" media="all">
+    <title>صفحه پرداخت</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'sentdex/img/pa.png' %}">
+    <link href="{% static 'sentdex/newcss/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'sentdex/newcss/fontawesome-all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'sentdex/newcss/shop.css' %}" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{% static 'sentdex/newcss/checkout.css' %}">
-    <link href="{% static 'sentdex/newcss/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css' />
-    <link href="{% static 'sentdex/newcss/style.css' %}" rel='stylesheet' type='text/css' media="all">
+    <link href="{% static 'sentdex/newcss/easy-responsive-tabs.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'sentdex/newcss/style.css' %}" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    
     <style>
         .pipo1 {
             width: 100%;
@@ -44,28 +38,32 @@
             margin: 4px 2px;
             cursor: pointer;
             font-size: 20px;
-            align: center;
         }
         input[type=submit]:hover {
             background-color: #363030;
         }
     </style>
+
 </head>
 <body>
+
+<!-- Navigation Header -->
 <div class="using-border py-3" style="background-color: #29a3a3;">
     <div class="inner_breadcrumb ml-4" style="background-color: #29a3a3;">
-        <ul class="short_ls" style="background-color: #29a3a3;">
+        <ul class="short_ls">
             <li><span style="font-size :20px;">سفرلو</span></li>
         </ul>
     </div>
 </div>
 
+<!-- Checkout Section -->
 <section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
     <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
         <div class="ads-grid_shop">
             <div class="shop_inner_inf">
                 <div class="privacy about">
                     <h3>پرداخت کنید<span>ذکر کنید</span></h3>
+
                     <div class="responsive_tabs">
                         <div id="horizontalTab">
                             <ul class="resp-tabs-list">
@@ -75,41 +73,44 @@
                                 <li>حساب پی پال</li>
                             </ul>
                             <div class="resp-tabs-container">
+                                <!-- Tab 1 - Payment Information -->
                                 <div class="tab1">
                                     <div class="pay_info">
                                         <div class="vertical_post check_box_agile">
                                             <table style="height: 256px;">
                                                 <tbody>
                                                     <tr>
-                                                        <td style="width: 156px;">شماره شخص</td>
-                                                        <td style="width: 156px;">مقصد</td>
-                                                        <td style="width: 156px;">قیمت</td>
+                                                        <td>شماره شخص</td>
+                                                        <td>مقصد</td>
+                                                        <td>قیمت</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 156px;">{{ no_of_person }}</td>
-                                                        <td style="width: 156px;">{{ city }}</td>
-                                                        <td style="width: 156px;">{{ price }}</td>
+                                                        <td>{{ no_of_person }}</td>
+                                                        <td>{{ city }}</td>
+                                                        <td>{{ price }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 156px;"></td>
-                                                        <td style="width: 156px;">+18%(GST)</td>
-                                                        <td style="width: 156px;">{{ GST }}</td>
+                                                        <td></td>
+                                                        <td>+18%(GST)</td>
+                                                        <td>{{ GST }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 156px;"><hr /></td>
-                                                        <td style="width: 156px;"><hr /></td>
-                                                        <td style="width: 156px;"><hr /></td>
+                                                        <td><hr /></td>
+                                                        <td><hr /></td>
+                                                        <td><hr /></td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 156px;"></td>
-                                                        <td style="width: 156px;">مجموع</td>
-                                                        <td style="width: 156px;">{{ final_total }}</td>
+                                                        <td></td>
+                                                        <td>مجموع</td>
+                                                        <td>{{ final_total }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Tab 2 - Credit/Debit Card Payment -->
                                 <div class="tab2">
                                     <div class="pay_info">
                                         <form action="{% url 'card_payment' %}" method="POST" class="creditly-card-form agileinfo_form">
@@ -137,32 +138,34 @@
                                         </form>
                                     </div>
                                 </div>
+
+                                <!-- Tab 3 - Net Banking -->
                                 <div class="tab3">
                                     <div class="pay_info">
-                                        <div class="vertical_post">
-                                            <form action="{% url 'net_payment' %}" method="post">
-                                                {% csrf_token %}
-                                                <label>نام کاربری</label><br>
-                                                {{ form.username }}
-                                                <label>رمز عبور</label><br>
-                                                {{ form.password }}
-                                                <label>بانک را انتخاب کنید</label><br>
-                                                <label for="bancks"></label><select id="bancks" name="banks">
-                                                    <option value="Bank of Baroda">Bank of Baroda</option>
-                                                    <option value="Bank of India">Bank of India</option>
-                                                    <option value="Canara Bank">Canara Bank</option>
-                                                    <option value="HDFC">HDFC</option>
-                                                    <option value="State Bank of India">State Bank of India</option>
-                                                </select><br>
-                                                <input type="submit" name="ارسال کنید" value="PAY NOW">
-                                            </form>
-                                        </div>
+                                        <form action="{% url 'net_payment' %}" method="post">
+                                            {% csrf_token %}
+                                            <label>نام کاربری</label><br>
+                                            {{ form.username }}
+                                            <label>رمز عبور</label><br>
+                                            {{ form.password }}
+                                            <label>بانک را انتخاب کنید</label><br>
+                                            <select id="bancks" name="banks">
+                                                <option value="Bank of Baroda">Bank of Baroda</option>
+                                                <option value="Bank of India">Bank of India</option>
+                                                <option value="Canara Bank">Canara Bank</option>
+                                                <option value="HDFC">HDFC</option>
+                                                <option value="State Bank of India">State Bank of India</option>
+                                            </select><br>
+                                            <input type="submit" name="ارسال کنید" value="PAY NOW">
+                                        </form>
                                     </div>
                                 </div>
+
+                                <!-- Tab 4 - PayPal Payment -->
                                 <div class="tab4">
                                     <div class="row pay_info">
                                         <div class="col-md-6 tab-grid">
-                                            <img class="pp-img" src="{% static 'sentdex/images/paypal.png' %}" alt="PayPal logo" title="PayPal payment option">
+                                            <img class="pp-img" src="{% static 'sentdex/images/paypal.png' %}" alt="PayPal logo">
                                             <p>مهم: شما به وب سایت PayPal هدایت می شوید تا پرداخت خود را ایمن انجام دهید.</p>
                                         </div>
                                         <div class="col-md-6">
@@ -190,6 +193,8 @@
         </div>
     </div>
 </section>
+
+<!-- Modal for Login -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -200,110 +205,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="register-form">
-                        <form action="#" method="post">
-                                <div class="fields-grid">
-                                    <div class="styled-input">
-                                        {{ form.first_name }}
-                                    </div>
-                                    <div class="styled-input">
-                                        {{ form.email }}
-                                    </div>
-                                    <div class="styled-input">
-                                        {{ form.password }}
-                                    </div>
-                                    <button type="submit" class="btn subscrib-btnn">وارد شوید</button>
-                                </div>
-                        </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <form action="login.php" method="post">
+                    <input type="text" class="form-control" placeholder="نام کاربری" name="username" required>
+                    <input type="password" class="form-control" placeholder="رمز عبور" name="password" required>
+                    <input type="submit" value="ورود">
+                </form>
             </div>
         </div>
     </div>
 </div>
-<script src="{% static 'sentdex/newjs/jquery-2.2.3.min.js' %}"></script>
-<script src="{% static 'sentdex/newjs/minicart.js' %}"></script>
-<script>
-    toys.render();
-    toys.cart.on('toys_checkout', function () {
-        let items, len, i;
-        if (this.subtotal() > 0) {
-            items = this.items();
-            for (i = 0, len = items.length; i < len; i++) {
-            }
-        }
-        });
-</script>
-<script src="{% static 'sentdex/newjs/easy-responsive-tabs.js' %}"></script>
-<script>
-    $(document).ready(function () {
+
+<!-- Scripts -->
+<script src="{% static 'sentdex/js/jquery-2.1.4.min.js' %}"></script>
+<script src="{% static 'sentdex/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'sentdex/js/easyResponsiveTabs.js' %}"></script>
+<script src="{% static 'sentdex/js/creditly.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
         $('#horizontalTab').easyResponsiveTabs({
             type: 'default', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            closed: 'accordion', // Start closed if in accordion view
-            activate: function () { // Callback function if tab is switched
-                let $tab = $(this);
-                let $info = $('#tabInfo');
-                let $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-
-            }
-        });
-        $('#verticalTab').easyResponsiveTabs({
-            type: 'vertical',
             width: 'auto',
             fit: true
         });
     });
-    </script>
-    <script src="{% static 'sentdex/newjs/creditly.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'sentdex/newcss/creditly.css' %}" type="text/css" media="all" />
-    <script>
-        $(function () {
-            let creditly = Creditly.initialize(
-                '.creditly-wrapper .expiration-month-and-year',
-                '.creditly-wrapper .credit-card-number',
-                '.creditly-wrapper .security-code',
-                '.creditly-wrapper .card-type');
-            $(".creditly-card-form .submit").click(function (e) {
-                e.preventDefault();
-                let output = creditly.validate();
-                if (output) {
-                    console.log(output);
-                }
-            });
-        });
-    </script>
-    <script src="{% static 'sentdex/newjs/move-top.js' %}"></script>
-    <script src="{% static 'sentdex//easing.js' %}"></script>
-    <script>
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
-                }, 900);
-            });
-        });
-        </script>
-        <script>
-            $(document).ready(function () {
-                let defaults = {
-                    containerID: 'toTop', // fading element id
-                    containerHoverID: 'toTopHover', // fading element hover id
-                    scrollSpeed: 1200,
-                    easingType: 'linear'
-                };
-                $().UItoTop({
-                    easingType: 'easeOutQuart'
-                });
-            });
 </script>
-<script src="{% static 'sentdex/newjs/bootstrap.min.js' %}"></script>
+
 </body>
 </html>
-
