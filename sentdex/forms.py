@@ -86,7 +86,12 @@ class RegisterForm(forms.Form):
         max_length=256,
         label="جستجو",
         widget=forms.TextInput(
-            attrs={"class": "input--style-4", "type": "text", "placeholder": "جستجو"}
+            attrs={
+                "class": "input--style-4",
+                "type": "text",
+                "placeholder": "جستجو",
+                "style": "width :150px; font-size: 14px;",
+            }
         ),
     )
     age = forms.IntegerField(

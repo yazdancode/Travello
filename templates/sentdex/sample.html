@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa" dir="auto">
+<html lang="fa" dir="rtl">
 
 <head>
     <meta charset="utf-8">
@@ -19,118 +19,258 @@
     <link rel="stylesheet" href="{% static 'sentdex/css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'sentdex/css/slicknav.css' %}">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'sentdex/css/style.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Gotu&display=swap&subset=devanagari" rel="stylesheet">
     <style>
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%; /* Make the inputs full width */
-            padding: 6px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+/* استایل‌های ورودی‌ها (text و number و select) */
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 6px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
-        input[type="submit"] {
-            width: 100%; /* Make the submit button full width */
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+/* استایل دکمه ارسال */
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        input[type="submit"]:hover {
-            background-color: #45a049;
-            box-shadow: 5px 7px 8px #888888;
-        }
+/* افکت هنگام هاور روی دکمه ارسال */
+input[type="submit"]:hover {
+    background-color: #45a049;
+    box-shadow: 5px 7px 8px #888888;
+}
+
+/* استایل منوی ناوبری */
+#navigation {
+    display: flex;
+    align-items: center; /* آیتم‌ها را در یک راستا تراز می‌کند */
+    justify-content: space-between; /* فضا بین آیتم‌ها را توزیع می‌کند */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* استایل هر آیتم در منو */
+#navigation li {
+    display: flex;
+    align-items: center; /* آیتم‌ها داخل هر <li> را در یک راستا تراز می‌کند */
+}
+
+/* استایل فرم جستجو */
+#navigation .form {
+    display: flex;
+    align-items: center; /* ورودی جستجو را در مرکز تراز می‌کند */
+}
+
+/* استایل ورودی جستجو */
+#navigation .form input {
+    height: 35px; /* ارتفاع مناسب برای ورودی جستجو */
+    margin-left: 5px; /* فاصله بین آیکون و ورودی */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* استایل آیکون جستجو */
+#navigation .fa-magnifying-glass {
+    margin-right: 5px; /* فاصله مناسب از ورودی */
+}
+
+/* استایل‌های پایه */
+body {
+    font-family: 'IranSans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* هدر سایت */
+.header-area {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+}
+
+/* نوار بالایی */
+.top-bar {
+    background: #ffcc00;
+    text-align: center;
+    padding: 10px 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* استایل لوگو */
+.logo img {
+    max-height: 50px;
+}
+
+/* استایل منو */
+.main-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.main-menu ul li {
+    position: relative;
+}
+
+/* استایل لینک‌های منو */
+.main-menu ul li a {
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* افکت هاور روی لینک‌ها */
+.main-menu ul li a:hover {
+    color: #007bff;
+}
+
+/* استایل جستجو */
+.search-box {
+    position: relative;
+    margin-right: 15px;
+}
+
+.search-box input {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 8px 15px;
+    width: 200px;
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff;
+    font-size: 16px;
+}
+
+/* استایل دکمه حالت روز و شب */
+.theme-btn {
+    background: #ddd;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.theme-btn:hover {
+    background: #007bff;
+    color: white;
+}
+
+
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="header-area">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container-fluid">
-                    <div class="header_bottom_border">
-                        <div class="row align-items-center">
-                            <div class="col-xl-2 col-lg-2">
-                                <div class="logo">
-                                    <a href="{% url 'home' %}">
-                                        <img src="{% static 'sentdex/img/logo.png' %}" alt="لوگو">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6">
-                                <div class="main-menu d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a class="active" href="{% url 'blog' %}">خانه</a></li>
-                                            <li><a href="{% url 'about' %}">درباره</a></li>
-                                            {% if user.is_authenticated %}
-                                            <li>سلام، {{ user.first_name }}</li>
-                                            <li><a href="{% url 'logout' %}">خروج</a></li>
-                                            {% else %}
-                                            <li><a href="{% url 'login' %}">وارد شوید</a></li>
-                                            <li><a href="{% url 'register' %}">ثبت نام کنید</a></li>
-                                            {% endif %}
-                                            <li><a href="#">وبلاگ<i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="{% url 'blog' %}">وبلاگ</a></li>
-                                                    <li><a href="{% url 'single-blog'%}">تک بلاگ</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="{% url 'contact' %}">تماس بگیرید</a></li>
+<header>
+    <div class="header-area">
+        <!-- نوار بالایی -->
+        <div class="top-bar">
+            <p>⭐ پیشنهاد ویژه: ثبت‌نام با تخفیف ۳۰٪ فقط تا پایان امروز!</p>
+        </div>
+        <!-- هدر اصلی -->
+        <div id="sticky-header" class="main-header-area">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- لوگو -->
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="logo">
+                            <a href="{% url 'home' %}">
+                                <img src="{% static 'sentdex/img/logo.png' %}" alt="لوگو">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- منوی اصلی -->
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation" class="d-flex justify-content-between">
+                                    <li><a class="active" href="{% url 'blog' %}">خانه</a></li>
+                                    <li><a href="{% url 'about' %}">درباره</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li>سلام, {{user.first_name}}</li>
+                                    <li><a href="{% url 'logout' %}">خروج</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'login' %}">وارد شوید</a></li>
+                                    <li><a href="{% url 'register' %}">ثبت نام کنید</a></li>
+                                    {% endif %}
+                                    <li><a href="{% url 'contact' %}">تماس بگیرید</a></li>
+                                    <li>
+                                        <a href="#">وبلاگ <i class="ti-angle-down"></i></a>
+                                        <ul class="submenu">
+                                            <li><a href="{% url 'blog' %}">وبلاگ</a></li>
+                                            <li><a href="{% url 'single-blog' %}">تک بلاگ</a></li>
                                         </ul>
-                                    </nav>
-                                </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- امکانات اضافی -->
+                    <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                        <div class="header-extras d-flex justify-content-end align-items-center">
+                            <!-- حالت روز و شب -->
+                            <button id="theme-toggle" class="theme-btn" title="تغییر حالت روز/شب">
+                                🌙
+                            </button>
+                            <!-- جستجو -->
+                            <div class="search-box">
+                                <form action="#" method="GET">
+                                    <input type="text" placeholder="جستجو کنید...">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
-                            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
-                                <div class="social_wrap d-flex align-items-center justify-content-end">
-                                    <div class="number">
-                                        <p> <i class="fa fa-phone"></i>09102779237</p>
-                                    </div>
-                                    <div class="social_links d-none d-xl-block">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
+                            <!-- شبکه‌های اجتماعی -->
+                            <div class="social-links d-flex">
+                                <a href="#" title="اینستاگرام"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" title="لینکدین"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="#" title="فیسبوک"><i class="fa-brands fa-facebook"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
+
     <form method="POST" action="{% url 'pessanger_detail_def' city_name='تهران' %}">
         {% csrf_token %}
-        
-        {{ form.trip_date }}
         <br>
         <input type="submit" id="button" value="ارسال کنید">
     </form>
     <a href="#">پسنگ جدید اضافه کنید</a>
     <br>
-    <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="serch_form">
-                    {{ form.search }}
-                    <button type="submit">جستجو کنید</button>
-                </div>
-            </div>
+            <div class="modal-content"></div>
         </div>
     </div>
     <script src="{% static 'sentdex/js/vendor/modernizr-3.5.0.min.js' %}"></script>
@@ -154,11 +294,6 @@
     <script src="{% static 'sentdex/js/validate.min.js' %}"></script>
     <script src="{% static 'sentdex/js/mail-script.js' %}"></script>
     <script src="{% static 'sentdex/js/main.js' %}"></script>
-    <script>
-        jQuery(function () {
-            jQuery('#datepicker').datepicker();
-        });
-    </script>
 </body>
 
 </html>

@@ -64,16 +64,12 @@
           transform: translateY(0);
         }
       }
-
-      /* انیمیشن هایور دکمه‌ها */
       .btn:hover {
         background-color: #00695c;
         box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
         transform: scale(1.05);
         transition: all 0.3s ease;
       }
-
-      /* انیمیشن پیام موفقیت */
       .message.success {
         animation: scaleUp 0.5s ease forwards;
       }
@@ -88,8 +84,6 @@
           opacity: 1;
         }
       }
-
-      /* انیمیشن گرادینت پس‌زمینه */
       .bg-gra-02 {
         background: linear-gradient(135deg, #71b7e6, #9b59b6);
         background-size: 200% 200%;
@@ -123,7 +117,6 @@
           transform: translateX(-5px);
         }
       }
-      /* انیمیشن حرکت فرم */
       .card-body {
         opacity: 0;
         transform: translateX(-50px);
@@ -136,7 +129,6 @@
           transform: translateX(0);
         }
       }
-      /* انیمیشن تغییر رنگ دکمه در هنگام کلیک */
       .btn:active {
         transform: scale(0.95);
         background-color: #004d40;
@@ -152,7 +144,6 @@
           <div class="card card-4">
             <div class="card-body">
               <h2 class="title">فرم ثبت نام</h2>
-
               <div class="row row-space">
                 <div class="col-2">
                   <div class="input-group">
@@ -167,7 +158,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="row row-space">
                 <div class="col-2">
                   <div class="input-group">
@@ -193,9 +183,9 @@
                 <div class="col-2">
                   <div class="input-group">
                     {{ form.phone_number }}
-                    <span class="tooltip"
-                      >لطفا شماره موبایل خود را وارد کنید</span
-                    >
+                    <span class="tooltip">
+                    لطفا شماره موبایل خود را وارد کنید
+                  </span>
                   </div>
                 </div>
               </div>
@@ -203,15 +193,16 @@
                 <button
                   class="btn btn--radius-2 btn--blue"
                   type="submit"
-                  onclick="this.classList.add('btn--loading')"
-                >
-                  ارسال کنید</button
-                ><br /><br /><br />
+                  onclick="this.classList.add('btn--loading')">
+                  ارسال کنید
+                  </button>
+                  <br />
+                  <br />
+                  <br />
                 <button
                   class="btn btn--radius-2 btn--green"
                   type="button"
-                  onclick="window.location.href='{% url 'login' %}'"
-                >
+                  onclick="window.location.href='{% url 'login' %}'">
                   وارد شوید
                 </button>
               </div>
@@ -224,8 +215,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Vendor JS -->
       <script src="{% static 'sentdex/colorlib-regform-4/vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'sentdex/colorlib-regform-4/vendor/select2/select2.min.js' %}"></script>
       <script src="{% static 'sentdex/colorlib-regform-4/vendor/datepicker/moment.min.js' %}"></script>
