@@ -6,145 +6,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تأیید OTP</title>
-    <link rel="icon" type="image/png" href="{% static 'sentdex/images/icons/favicon.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/vendor/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/fonts/iconic/css/material-design-iconic-font.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/vendor/animate/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/vendor/css-hamburgers/hamburgers.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/vendor/animsition/css/animsition.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/vendor/select2/select2.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/vendor/daterangepicker/daterangepicker.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/css/util1.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'sentdex/css/main1.css' %}">
+    <link rel="icon" href="{% static 'sentdex/images/icons/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'sentdex/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sentdex/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
     <style>
         body {
-            font-family: Nimbus Sans L, Arial, sans-serif;
             background-color: #006699;
+            color: #fff;
+            font-family: Tahoma, sans-serif;
         }
-        h1 {
-            font-size: 40px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            font-size: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            width: 100%;
-            background-color: #000000;
-            border: none;
-            color: white;
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px auto;
             padding: 10px 20px;
-            margin: 4px 2px;
-            font-size: 20px;
-            cursor: pointer;
-            border-radius: 4px;
+            max-width: 1200px;
+            background-color: #005580;
+            border-radius: 8px;
         }
-        .shrey {
-            width: 100%;
-            color: #ebebe0;
-            padding: 10px;
-            background-color: #f2f2f2;
+        .logo img {
+            height: 60px;
+        }
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
         }
         .social_links ul {
-            list-style: none;
-            padding: 0;
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            list-style: none;
+            gap: 15px;
+            margin: 0;
         }
-        .social_links ul li a {
-            color: #000;
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            color: #333;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        table th {
+            background-color: #0077cc;
+            color: #fff;
         }
     </style>
 </head>
 <body>
-    <div class="shrey">
-        <div class="row align-items-center">
-            <div class="col-xl-2 col-lg-2">
-                <div class="logo">
-                    <a href="{% url 'home' %}">
-                        <img src="{% static 'sentdex/img/logo.png' %}" alt="Logo">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6">
-                <div class="main-menu d-none d-lg-block">
-                    <nav>
-                        <ul id="navigation">
-                            <li><a class="active" href="{% url 'home' %}">خانه</a></li>
-                            <li><a href="{% url 'about' %}">درباره</a></li>
-                            {% if user.is_authenticated %}
-                                <li>سلام, {{ user.first_name }}</li>
-                                <li><a href="{% url 'logout' %}">خروج</a></li>
-                            {% else %}
-                                <li><a href="{% url 'login' %}">وارد شوید</a></li>
-                                <li><a href="{% url 'register' %}">ثبت نام کنید</a></li>
-                            {% endif %}
-                            <li><a href="#">وبلاگ <i class="fa fa-angle-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="{% url 'blog' %}">وبلاگ</a></li>
-                                    <li><a href="{% url 'single-blog' %}">تک وبلاگ</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{% url 'contact' %}">تماس بگیرید</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
-                <div class="social_wrap d-flex align-items-center justify-content-end">
-                    <div class="number">
-                        <p><i class="fa fa-phone"></i> 0261-25569</p>
-                    </div>
-                    <div class="social_links">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'sentdex/img/logo.png' %}" alt="لوگو">
+            </a>
         </div>
-    </div>
-    <div class="limiter" style="background-color:  #006699 ; ">
-        <div class="container-login100"   style="background-color:  #006699 ;">
-            <form action="{% url 'otp_verification' %}" method='POST'>
-                {%csrf_token%}
-                <table>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">خانه</a></li>
+                <li><a href="{% url 'about' %}">درباره</a></li>
+                {% if user.is_authenticated %}
+                    <li>سلام، {{ user.first_name }}</li>
+                    <li><a href="{% url 'logout' %}">خروج</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">ورود</a></li>
+                    <li><a href="{% url 'register' %}">ثبت نام</a></li>
+                {% endif %}
+                <li><a href="{% url 'contact' %}">تماس</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="{% url 'otp_verification' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                <thead>
                     <tr>
-                        <th>
-                            شناسه سفر
-                        </th>
-                        <th>تاریخ سفر</th>
-                        <th class="pipo">نام</th>
-                        <th class="pipo">نام خانوادگی</th>
-                        <th class="pipo1">سن</th>
-                        <th class="pipo2">
-                             مقصد
-                        </th>
-                        
+                        <th>شناسه سفر</th>
+                        <th>نام</th>
+                        <th>نام خانوادگی</th>
+                        <th>سن</th>
+                        <th>مقصد</th>
                     </tr>
-                    {% for per in person%}
+                </thead>
+                <tbody>
+                    {% for per in person %}
                     <tr>
-                        <td>{{per.trip_reference_id}}</td>
-                        <td>{{per.first_name}}</td>
-                        <td>{{per.last_name}}</td>
-                        <td>{{per.age}}</td>
-                        <td>{{per.city}}</td>
+                        <td>{{ per.trip_reference_id }}</td>
+                        <td>{{ per.first_name }}</td>
+                        <td>{{ per.last_name }}</td>
+                        <td>{{ per.age }}</td>
+                        <td>{{ per.city }}</td>
                     </tr>
-                    {%endfor%}
-
-                </table>
-                
-                    
-    </div>
-
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">هیچ اطلاعاتی موجود نیست.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </main>
+    <footer class="social_links">
+        <ul>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        </ul>
+    </footer>
 </body>
 </html>
