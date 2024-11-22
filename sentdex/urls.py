@@ -1,5 +1,4 @@
 from django.urls import path
-
 from sentdex.views import (
     DestinationListView,
     DestinationView,
@@ -45,7 +44,7 @@ urlpatterns = [
         PassengerDetailView.as_view(),
         name="pessanger_detail_def",
     ),
-    path("upcoming_trips", UpcomingTripsView.as_view(), name="upcoming_trips"),
+    path("upcoming_trips/", UpcomingTripsView.as_view(), name="upcoming_trips"),
     path(
         "destination_list/destination_details/pessanger_detail_def/pessanger_detail_def/card_payment",
         CardPaymentView.as_view(),

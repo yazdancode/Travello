@@ -1,6 +1,5 @@
 import random
 from datetime import datetime
-
 from django.contrib import auth, messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -227,13 +226,13 @@ class PassengerDetailView(View):
 
 
 class UpcomingTripsView(View):
-    template_name = "sentdex/upcoming_trip.html"
+    template_name = "sentdex/upcoming trip.html"
 
     def get(self, request, *args, **kwargs):
         username = request.user.get_username()
         data = datetime.now().date()
         person = PassengerDetail.objects.filter(
-            username=username, pay_done=1, Trip_date__gte=data
+            username=username, pay_done=1, trip_date__gte=data
         )
         return render(request, self.template_name, {"person": person})
 
